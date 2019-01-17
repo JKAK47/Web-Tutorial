@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class InfoController {
-    @RequestMapping(method = RequestMethod.GET,value = "/infos")
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    @RequestMapping(method = RequestMethod.GET,value = "/pengrong")
+    public ModelAndView gg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println(" infoController handleRequest method invoke.");
         ModelAndView view=new ModelAndView();
         /** 设置模型数据，可以是任意的POJO对象 */
