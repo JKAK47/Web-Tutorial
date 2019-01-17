@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+    <!-- SpringMvc 基于XML 文件进行配置 -->
+    <!-- 注解驱动，激活基于注解的配置 @RequestMapping, @ExceptionHandler,数据绑定 ,@NumberFormat ,
+    @DateTimeFormat ,@Controller ,@Valid ,@RequestBody ,@ResponseBody等   -->
+    <mvc:annotation-driven/>
+
+    <!-- 激活一系列Spring容器内部的注解，resources,austoware等注解 -->
+    <context:annotation-config />
+
+    <!-- 扫描路径, 启用注解，并定义组件查找规则 ，mvc层只负责扫描@Controller
+        Spring 自动去扫描base-package下面的包或者子包下面的Java文件.
+        use-default-filters 默认为true，将，会将base-package指定属性下子包所有@Service/@Repository Bean 注入进Spring容器。
+        为了防止这个动作，use-default-filters 设置为false。
+        同时base-package 设置属性最后设置为controller的基package。
+      -->
+    <context:component-scan base-package="org.vincent.web.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 视图处理器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- prefix 前缀 表示资源基目录
+            suffix 后缀 表示资源文件类型
+         -->
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    <!-- 需要handle bean 配置name属性，设置处理映射器将Handle bean 的name属性作为url进行查找。 -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+        <!-- 确定 这个处理映射器的 优先级 ，order 越小优先级越大 -->
+        <property name="order" value="2"/>
+    </bean>
+    <!-- 处理器适配器，所有处理器适配器都需要实现的HandlerAdapter接口。 -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!-- 手动配置 Controller -->
+    <!-- 配置一个Handle 处理info 请求的 控制器。 -->
+    <bean name="/info" class="org.vincent.web.controller.InfoController"/>
+</beans>
