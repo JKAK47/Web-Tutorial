@@ -166,3 +166,5 @@
 </project>
 
 ```
+
+[Maven(4)-利用intellij idea创建maven 多模块项目](http://www.cnblogs.com/Brake/p/create_maven_multi_module_project_via_intellij_idea.html)
