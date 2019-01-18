@@ -27,8 +27,7 @@
         <!--Servlet 对应的实现类，当前使用SpringMVC 框架提供的前端控制器  -->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!--   当前Servlet参数设置，参数值为SpringMVC配置文件路径，
-        如果这一步注释掉，则默认前端控制器的Spring-mvc寻找路径为：/WEB-INF/[servlet-name]-servlet.xml ；
-        在WEB-INF目录下寻找映射文件
+        如果这一步注释掉，则默认前端控制器的Spring-mvc 在WEB-INF目录下寻找映射文件，寻找路径为：/WEB-INF/[servlet-name]-servlet.xml ；
         或者在 main/resources/springmvc-servlet.xml: 写成 classpath:springmvc-servlet.xml
          -->
         <init-param>

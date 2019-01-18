@@ -46,5 +46,5 @@
 
     <!-- 手动配置 Controller -->
     <!-- 配置一个Handle 处理info 请求的 控制器。 -->
-    <bean name="/info" class="org.vincent.web.controller.InfoController"/>
+    <!--<bean name="/info" class="org.vincent.web.controller.InfoController"/>-->
 </beans>

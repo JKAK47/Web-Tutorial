@@ -17,7 +17,7 @@
     <url>http://www.example.com</url>
     <developers>
         <developer>
-            <id>dsaff</id>
+            <id>0001</id>
             <name>PengRong</name>
             <email>1557862201@qq.com</email>
         </developer>
@@ -137,13 +137,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
-            <!--自动部署 -->
+            <!--自动部署  有个问题是启动后没有给出访问URL
+                首页: http://localhost:8080/springmvc-tutorial/
+             -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <configuration>
                     <container>
-                        <!-- 指明使用的tomcat服务器版本 -->
+                        <!-- 指明使用的tomcat服务器版本 启动的是 8.0.53 版本tomcat 容器 -->
                         <containerId>tomcat7x</containerId>
                         <!--指明tomcat服务器的安装目录 -->
                         <home>${tomcat.basedir}</home>
