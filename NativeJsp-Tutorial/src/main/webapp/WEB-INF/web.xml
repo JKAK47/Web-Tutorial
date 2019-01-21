@@ -10,6 +10,11 @@
   <!-- display-name 可有可无-->
   <display-name>NativeJSP-WebApp</display-name>
 
+  <!-- 定义全局变量 -->
+  <context-param>
+    <param-name>nativejsp</param-name>
+    <param-value>javaweb-100</param-value>
+  </context-param>
   <!-- 定义一个处理 获取新闻数据的servlet
     通过 /news访问
    -->
@@ -27,6 +32,10 @@
   <servlet>
     <servlet-name>registerServlet</servlet-name>
     <servlet-class>org.vincent.servlet.RegisterServlet</servlet-class>
+    <init-param>
+      <param-name>registerone</param-name>
+      <param-value>50</param-value>
+    </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
