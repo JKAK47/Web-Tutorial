@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <context id="NativeJsp" targetRuntime="MyBatis3">
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 用于给 自动生成的mapper 接口 selectByExample 方法添加 RowBounds 参数 -->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制
+         suppressDate =true 我不希望注释中含有mybatis生成代码的日期
+         suppressAllComments =false 表示我希望有注释
+         -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://112.74.63.132:3306/nativejsp?characterEncoding=utf-8"
+                        userId="root" password="mysql">
+        </jdbcConnection>
+        <!-- java 类型处理器
+             用于定义 DB中的数据类型到Java中的数据类型转换规则；
+             默认使用 JavaTypeResolverDefaultImpl；注意一点，forceBigDecimals=false 将默认会先尝试使用 Integer，Long，Short等来对应DECIMAL和 NUMERIC 数据类型；
+             forceBigDecimals =true 将总是把  DECIMAL or NUMERIC 类型转换为 BigDecimal 类型
+         -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--生成Model类存放位置
+             targetPackage：生成的类要放的package，真实的包受enableSubPackages属性控制；
+            targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
+        -->
+        <javaModelGenerator targetPackage="org.vincent.dao.model" targetProject="src/main/java">
+            <!--  for MyBatis3/MyBatis3Simple
+          constructorBased = true : constructorBased自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
+          如果false就会使用setter方式。默认为false。
+        -->
+            <!--<property name="constructorBased" value="false"/>-->
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 设置是否在setter方法中，对String类型字段调用trim()方法 -->
+            <property name="trimStrings" value="true"/>
+            <!-- for MyBatis3 / MyBatis3Simple
+            是否创建一个不可变的类，如果为true，
+            那么MBG会创建一个没有setter方法的类，取而代之的是类似constructorBased的类;
+            默认为false
+         -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!--
+            mapper文件生成路径
+            生成映射文件存放位置 或者基于注解的 Mapper 类所在位置
+            注意，在Mybatis3之后，我们可以使用mapper.xml文件+Mapper接口（或者不用mapper接口），
+            或者只使用Mapper接口+Annotation( 本文所用方式，单表不用xml文件 )，所以；
+            如果 javaClientGenerator 配置中配置了需要生成XML的话，这个元素就必须配置
+            targetPackage/targetProject:同javaModelGenerator
+         -->
+        <!--<sqlMapGenerator targetPackage="org.vincent.dao.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator> -->
+
+        <!--生成Dao类存放位置-->
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                type="ANNOTATEDMAPPER",生成基于Mybatis3.x 的Mapper接口对象，该接口基于Mybatis3.x的注解和 Mybatis3.x SqlProviders
+                type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                type="XMLMAPPER",生成基于Mybatis3.x 的Mapper接口对象, 该接口基于 生成SQLMap XML文件
+                mybatis-generator:generate
+        -->
+         <!-- 第一种 无xml 文件,Mapper接口 基于注解 + MyBatis 3.x SqlProviders -->
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="org.vincent.dao.impl"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 第二种方式：生成 MyBatis3.x mapper 接口以及接口依赖的对应xml 文件
+          sqlMapGenerator 元素必须 在 javaClientGenerator 元素之前
+          -->
+        <!--要生成的 Mapper.xml 文件位置-->
+       <!-- <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.vincent.dao.impl"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>-->
+
+        <!--生成对应表及类名-->
+        <table tableName="%" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"></table>
+    </context>
+</generatorConfiguration>

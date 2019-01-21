@@ -1,7 +1,46 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <!-- Servlet3.1 begin tomcat8.0.x
+          servlet 3.1 JSP 2.3, EL 3.0
+          -->
+  <!-- display-name 可有可无-->
+  <display-name>NativeJSP-WebApp</display-name>
+
+  <!-- 定义一个处理 获取新闻数据的servlet
+    通过 /news访问
+   -->
+  <servlet>
+    <servlet-name>newsServlet</servlet-name>
+    <servlet-class>org.vincent.servlet.NewsServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>newsServlet</servlet-name>
+    <url-pattern>/newsA</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 定义一个login servlet ，并通过font/userlist.jsp 返回登入login 的输入信息 -->
+  <servlet>
+    <servlet-name>registerServlet</servlet-name>
+    <servlet-class>org.vincent.servlet.RegisterServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>registerServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+
+  <!-- 欢迎页面设置匹配规则 -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+
+
 </web-app>
