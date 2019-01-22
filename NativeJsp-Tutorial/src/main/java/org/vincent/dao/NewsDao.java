@@ -18,33 +18,33 @@ import java.util.Properties;
  * @Description: 操作news 表
  */
 public class NewsDao {
-    private static Connection connection = null;
 
-    static {
-        try {
-            Properties properties = null;
-            properties = MysqlDbUtils.loadProperties("mysql.properties");
-            MysqlDbUtils dbUtils = MysqlDbUtils.getConn(properties);
-            connection = dbUtils.getConn();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Connection getConnection() throws IOException {
+        Properties properties = null;
+        properties = MysqlDbUtils.loadProperties("mysql.properties");
+        MysqlDbUtils dbUtils = MysqlDbUtils.getConn(properties);
+        Connection connection = dbUtils.getConn();
+        return connection;
     }
 
     public List<News> querys() {
         List<News> news = new ArrayList<>();
-
+        Connection connection = null;
         try {
+            connection = getConnection();
             if (connection != null) {
+                if (connection.isClosed()) {
+                    return news;
+                }
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("select * from news order by NewsID desc");
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     int NewsID = resultSet.getInt("NewsID");
                     String NewsTitle = resultSet.getString("NewsTitle");
                     String NewsContent = resultSet.getString("NewsContent");
                     String NewsTime = resultSet.getString("NewsTime");
                     String AdminName = resultSet.getString("AdminName");
-                    News tempNew=new News(NewsID,NewsTitle,NewsTime,AdminName,NewsContent);
+                    News tempNew = new News(NewsID, NewsTitle, NewsTime, AdminName, NewsContent);
                     news.add(tempNew);
                 }
             }
@@ -52,11 +52,12 @@ public class NewsDao {
             e.printStackTrace();
         } finally {
             if (connection != null) {
-               try {
-                   connection.close();
-               }catch (Exception e){
-                   e.printStackTrace();
-               }
+                try {
+                    connection.close();
+                    connection = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return news;
