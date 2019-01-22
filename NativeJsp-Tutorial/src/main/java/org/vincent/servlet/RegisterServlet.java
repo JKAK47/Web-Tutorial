@@ -25,13 +25,13 @@ public class RegisterServlet extends HttpServlet {
         /* 1、 获取在web.xml 通过context-param元素定义的全局变量  */
         String nativejsp = this.getServletContext().getInitParameter("nativejsp");
         System.out.println(nativejsp);
-        /* 2、 读web根目录目录下 */
+        /* 2、 读web根目录目录下,webapp 目录下 */
         InputStream inputStream = this.getServletContext().getResourceAsStream("/one.md");
         Objects.nonNull(inputStream);
         /*WEB-INF目录下的资源文件文件*/
         inputStream = this.getServletContext().getResourceAsStream("/WEB-INF/two.md");
         /*读取src/main/resources/目录下文件,该目录下最后打包后是复制到
-         * WEB-INF/classes目录下
+         * WEB-INF/classes目录下，该目录下是 src/main/resources/目录，src/main/java/目录两个目录的资源文件
          * */
         inputStream = this.getServletContext().getResourceAsStream("/WEB-INF/classes/" + "mysql.properties");
 
@@ -42,7 +42,8 @@ public class RegisterServlet extends HttpServlet {
         String path = this.getServletContext().getRealPath("/images/1.png");
         /* getResource 方法必须以 / 符号开始，从webApp root 目录开始寻找资源文件 */
         this.getServletContext().getResource("/");
-
+        /* ServletContext 属性 */
+        this.getServletContext().setAttribute("ServletContextKey","ServletContextValue");
         /** ServletContext 使用场景 end  */
 
         /* 获取Servlet 初始化定义的变量 */
@@ -83,6 +84,8 @@ public class RegisterServlet extends HttpServlet {
         req.getRequestURL();
         /* 转发给 另外一个jsp  */
         req.getRequestDispatcher("font/userlist.jsp").forward(req, resp);
+        /* 路径必须以 / 符号开始 解析为相对context root 目录下 */
+        //this.getServletContext().getRequestDispatcher("/xx").forward(req, resp);
     }
 
     @Override
