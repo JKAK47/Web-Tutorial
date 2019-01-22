@@ -14,8 +14,8 @@
 <body>
 <%-- 调用 servlet = RegisterServlet 的后台处理类
     action="../register" 这样写 是因为 login.jsp 在 webapp\admin\目录下，在web 根目录下admin子目录
-    所以你要访问映射到根目录下的 register servlet服务，直接通过浏览器URL = http://localhost:8088/nativejsp/register访问
-    那么在login.jsp这里你要访问根目录下的  register servlet服务，是不是就是要通过  ../register 访问。
+    所以你要访问映射到根目录下的 register servlet服务，直接通过浏览器 URL = http://localhost:8088/nativejsp/register访问
+    那么在login.jsp这里你要访问根目录下的  register Servlet 服务，是不是就是要通过  ../register 访问。
  --%>
 <form method="post" action="../register">
     注册页面
@@ -73,7 +73,6 @@
         <!-- 第六行 -->
         <tr>
             <td>
-
             </td>
             <td>
                 <input type="submit" value="提交"/>

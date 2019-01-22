@@ -17,6 +17,8 @@
   </context-param>
   <!-- 定义一个处理 获取新闻数据的servlet
     通过 /news访问
+    https://blog.csdn.net/icarus_wang/article/details/51649635
+
    -->
   <servlet>
     <servlet-name>newsServlet</servlet-name>

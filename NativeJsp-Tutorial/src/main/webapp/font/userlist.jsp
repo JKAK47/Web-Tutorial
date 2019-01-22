@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.vincent.dao.model.UserBean" %>
 <%
+    /* 获取request 级别的数据 被servlet 设置的属性  */
     UserBean user = (UserBean) request.getAttribute("USERLIST");
+    String requestUrl=request.getRequestURL().toString();
 %>
 <html>
 <head>
@@ -16,6 +18,11 @@
     <title>userList</title>
 </head>
 <body>
+<%-- java print  requestUrl --%>
+<h3><%=
+    requestUrl
+%></h3>
+
 <table border="1px;">
     <!-- 第一行 -->
     <tr>

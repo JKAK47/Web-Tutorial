@@ -3,6 +3,8 @@ package org.vincent.servlet;
 import org.vincent.dao.model.UserBean;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,10 @@ import java.util.Objects;
  * @ProjectName Web-Tutorial
  * @Description: 这个servlet 接受 login.jsp 页面的请求 ，组织login.jsp提交的数据，并转发 在 font/userlist.jsp 输出。
  */
+/*@WebServlet(name = "asdf",urlPatterns = {"/sdf","/sdf"}, loadOnStartup = 0,
+        initParams = {
+        @WebInitParam(name = "key1",value = "asdfasd"),
+        @WebInitParam(name = "key2",value = "sdfas")})*/
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -82,6 +88,7 @@ public class RegisterServlet extends HttpServlet {
 
         req.setAttribute("USERLIST", userBean);
         req.getRequestURL();
+        req.getRequestURI();
         /* 转发给 另外一个jsp  */
         req.getRequestDispatcher("font/userlist.jsp").forward(req, resp);
         /* 路径必须以 / 符号开始 解析为相对context root 目录下 */
