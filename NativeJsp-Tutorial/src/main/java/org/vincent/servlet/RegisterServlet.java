@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Objects;
 
 /**
@@ -29,15 +30,15 @@ public class RegisterServlet extends HttpServlet {
         Objects.nonNull(inputStream);
         /*WEB-INF目录下的资源文件文件*/
         inputStream = this.getServletContext().getResourceAsStream("/WEB-INF/two.md");
-          /*读取src/main/resources/目录下文件,该目录下最后打包后是复制到
-           * WEB-INF/classes目录下
-            * */
+        /*读取src/main/resources/目录下文件,该目录下最后打包后是复制到
+         * WEB-INF/classes目录下
+         * */
         inputStream = this.getServletContext().getResourceAsStream("/WEB-INF/classes/" + "mysql.properties");
 
         /* 3、 构建文件绝对路径
-        *  路径参数如果以: "/"(代表web项目根目录) 字符开始，获取的路径是相对web 项目的根目录(也即webapp 目录下)
-        *
-        * */
+         *  路径参数如果以: "/"(代表web项目根目录) 字符开始，获取的路径是相对web 项目的根目录(也即webapp 目录下)
+         *
+         * */
         String path = this.getServletContext().getRealPath("/images/1.png");
         /* getResource 方法必须以 / 符号开始，从webApp root 目录开始寻找资源文件 */
         this.getServletContext().getResource("/");
@@ -49,14 +50,27 @@ public class RegisterServlet extends HttpServlet {
 
         String id = req.getSession().getId();
         req.setCharacterEncoding("utf-8");
+        resp.getClass();
         resp.setContentType("text/html;charset=utf-8");
-        /* 获取 query 查询参数*/
+        /* 获取 query 查询参数  ?id=10&name=20 形式参数 */
         String account = req.getParameter("account");
         String name = req.getParameter("name");
         String gender = req.getParameter("gender");
+        /* 获取 key 对应的 一组值， 对应前端是checkbox 多选框选定的值 */
         String[] interest = req.getParameterValues("interest");
         String msg = req.getParameter("msg");
-
+        /* 获取query 查询参数另外一种方式*/
+        Enumeration<String> enumerations = req.getParameterNames();
+        while (enumerations.hasMoreElements()) {
+            String key = enumerations.nextElement();
+            System.out.println("key: " + key + ",\tvalue: " + req.getParameter(key));
+        }
+        /* 获取Http Header */
+        Enumeration<String>  headers = req.getHeaderNames();
+        while (headers.hasMoreElements()){
+            String headerkey =headers.nextElement();
+            System.out.println("headerkey: "+headerkey+",\theaderValue: "+req.getHeader(headerkey));
+        }
         UserBean userBean = new UserBean();
         userBean.setAccount(account);
         userBean.setName(name);
@@ -66,8 +80,9 @@ public class RegisterServlet extends HttpServlet {
 
 
         req.setAttribute("USERLIST", userBean);
+        req.getRequestURL();
+        /* 转发给 另外一个jsp  */
         req.getRequestDispatcher("font/userlist.jsp").forward(req, resp);
-
     }
 
     @Override
