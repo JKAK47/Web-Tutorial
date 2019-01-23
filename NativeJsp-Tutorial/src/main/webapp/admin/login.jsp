@@ -16,6 +16,9 @@
     action="../register" 这样写 是因为 login.jsp 在 webapp\admin\目录下，在web 根目录下admin子目录
     所以你要访问映射到根目录下的 register servlet服务，直接通过浏览器 URL = http://localhost:8088/nativejsp/register访问
     那么在login.jsp这里你要访问根目录下的  register Servlet 服务，是不是就是要通过  ../register 访问。
+    action="register" 最后访问的路径 是 ： http://localhost:8080/nativejsp/admin/register
+    action="/register"  最后访问的路径 是 ： http://localhost:8080/register
+
  --%>
 <form method="post" action="../register">
     注册页面
