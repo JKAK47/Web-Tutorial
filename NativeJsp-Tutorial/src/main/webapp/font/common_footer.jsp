@@ -9,7 +9,7 @@
 			</p>
 			<p>
 				<a href="http://www.baidu.com">xx科技</a> 技术支持
-				<a href="../admin/login.jsp">后台</a> 
+				<a href="<%=basePath%>/admin/login.jsp">后台</a>
 			</p>
 			<p>
 				粤ICP备  10002740号-2  吉公网安备2201xxxww0202000132号

@@ -16,11 +16,11 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>XX科技有限公司</title>
-    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="<%=basePath%>/font/css/main.css" rel="stylesheet" type="text/css">
     <%--<link href="css/container.css" rel="stylesheet" type="text/css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link href="css/screen.css" rel="stylesheet" type="text/css">--%>
-    <script src="js/jquery.min.js">
+    <script src="<%=basePath%>/font/js/jquery.min.js">
     </script>
    <%-- <script src="js/tab.js">
     </script>--%>
@@ -31,7 +31,7 @@
 
 <!--banner-->
 <div class="second_banner">
-    <img src="img/3.gif" alt="">
+    <img src="<%=basePath%>/img/3.gif" alt="">
 </div>
 <!--//banner-->
 <!--新闻-->
@@ -99,9 +99,9 @@
 </body>
 
 <!--//底部-->
-<script>
+<%--<script>
     tabs("#tab", "active", "#tab_con");
-</script>
+</script>--%>
 
 
 
