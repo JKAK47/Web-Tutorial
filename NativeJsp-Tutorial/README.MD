@@ -199,6 +199,14 @@ jsp页面取值：
  UserBean user = (UserBean) request.getAttribute("USERLIST");
 ``` 
 
+# jsp与servlet的关系：
+
+使用Servlet产生动态网页，需要在java代码中打印输出很多HTML的标签，此外，在Servlet中，我们不得不将页面静态的内容和动态产生内容的代码混合在一起。
+使用Servlet开发动态网页，程序员和网页编辑人员将无法一起工作，因为网页编辑人员不了解Java语言，无法修改Servlet代码，
+而Java程序员可能也不是很了解网页编辑人员的意图，以至于无法修改和实现网页功能。为了解决这些问题，Sun公司就推出了JSP技术。JSP是Servlet的一种特殊形式，JSP是Servlet的一种简化，
+每个JSP页面就是一个Servlet实例，每个JSP页面在第一次访问由Servlet容器编译成Servlet，生成的Servlet 负责响应用户请求 。JSP被编译成Servlet后生成请求响应Response ，响应体是标准的HTML字节流，输送到客户端。重点词：(标准 HTML 页面字节流)
+JSP页面编译生成的Servlet放在`tomcat安装路径/work路径`对应的Web应用目录下，
+
 [Servlet的跳转有2种，一种是转发，一种是重定向。](https://www.cnblogs.com/LinkinPark/p/5233006.html)
    
 [JSP和Servlet传递数据的几种方式](https://blog.csdn.net/qq_38006520/article/details/81567379)
