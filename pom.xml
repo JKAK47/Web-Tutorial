@@ -21,6 +21,15 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>web 所有经典的项目类型案例</name>
+    <!-- 开发者信息 -->
+
+    <developers>
+        <developer>
+            <id>0001</id>
+            <name>PengRong</name>
+            <email>1557862201@qq.com</email>
+        </developer>
+    </developers>
     <!-- 父级pom里面管理所有组件依赖，其他module 按需 声明使用即可 -->
     <dependencyManagement>
         <dependencies>
@@ -169,8 +178,6 @@
             </dependency>
             <!-- 导入Mysql数据库链接jar包 End -->
             <!-- mybatis  + mysql lib stop -->
-
-
 
 
             <!-- SpringMVC Begin -->
@@ -432,19 +439,19 @@
                     <groupId>org.codehaus.cargo</groupId>
                     <artifactId>cargo-maven2-plugin</artifactId>
                     <version>1.2.3</version>
-                   <!-- <configuration>
-                        <container>
-                            &lt;!&ndash; 指明使用的tomcat服务器版本 &ndash;&gt;
-                            <containerId>tomcat7x</containerId>
-                            &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
-                            <home>${tomcat.basedir}</home>
-                        </container>
-                        <configuration>
-                            <type>existing</type>
-                            &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
-                            <home>${tomcat.basedir}</home>
-                        </configuration>
-                    </configuration>-->
+                    <!-- <configuration>
+                         <container>
+                             &lt;!&ndash; 指明使用的tomcat服务器版本 &ndash;&gt;
+                             <containerId>tomcat7x</containerId>
+                             &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
+                             <home>${tomcat.basedir}</home>
+                         </container>
+                         <configuration>
+                             <type>existing</type>
+                             &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
+                             <home>${tomcat.basedir}</home>
+                         </configuration>
+                     </configuration>-->
                     <executions>
                         <execution>
                             <id>cargo-run</id>

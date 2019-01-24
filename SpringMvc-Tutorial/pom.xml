@@ -24,6 +24,7 @@
     </developers>
 
     <properties>
+        <!-- 本地tomcat 安装路径 -->
         <tomcat.basedir>D:\Dev\tomcat\apache-tomcat-8.0.53</tomcat.basedir>
     </properties>
 
@@ -59,6 +60,7 @@
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
+            <!--provided意味着打包的时候可以不用打包进去, JDK或者运行时候容器提供了该包  -->
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -12,7 +12,7 @@
     <artifactId>urlpattern-tomcat-demo</artifactId>
     <packaging>war</packaging>
 
-    <name>urlpattern-tomcat-demo Maven Webapp</name>
+    <name>理解 Servlet urlpattern四种URL匹配规则</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

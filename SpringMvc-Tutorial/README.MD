@@ -1,9 +1,9 @@
-# 基于SpringMc + Spring+ Mybatis 实现的 web 项目 
+# 基于SpringMvc + Spring+ Mybatis 实现的 web 项目 
 ## tomcat apache-tomcat-8.0.53
 - Mybatis 3.4.4
 - tomcat 8.x 版本 servlet 3.1 JSP 2.3, EL 3.0
 - Spring 5.1.3.RELEASE
-## 基于SpringMvc 最小配置
+## 基于SpringMvc  最小配置
 包括Servlet 3.1 相关API jar包，Spring 家族basic jar包，Spring web 相关的jar 包，mybatis mysql 相关的jar 包 
 ### 第一步： pom.xml 声明需要使用的jar 
 在该pom 中所有需要的 jar 包的版本，以及插件的版本 都在父Pom里面管理，这里只需要声明需要使用那些构件即可。

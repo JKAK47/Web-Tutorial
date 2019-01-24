@@ -8,48 +8,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
-    <display-name>Archetype Created Web Application</display-name>
-    <welcome-file-list>
-        <!-- 定义默认url 访问 的首页。安装文件名在webapp目录下 一个一个寻找直到找到同名的文件。  -->
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.htm</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
-        <welcome-file>default.html</welcome-file>
-        <welcome-file>default.htm</welcome-file>
-        <welcome-file>default.jsp</welcome-file>
-    </welcome-file-list>
+    <display-name>SpringMvc Web Application</display-name>
+    <description>SpringMVC Tutorial</description>
 
-    <description>SpringMVC XXX</description>
-    <!-- Spring MVC 前端控制器  Begin -->
-    <servlet>
-        <!-- Servlet 的名称 -->
-        <servlet-name>springmvc</servlet-name>
-        <!--Servlet 对应的实现类，当前使用SpringMVC 框架提供的前端控制器  -->
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!--   当前Servlet参数设置，参数值为SpringMVC配置文件路径，
-        如果这一步注释掉，则默认前端控制器的Spring-mvc 在WEB-INF目录下寻找映射文件，寻找路径为：/WEB-INF/[servlet-name]-servlet.xml ；
-        或者在 main/resources/springmvc-servlet.xml: 写成 classpath:springmvc-servlet.xml
-         -->
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/springmvc-servlet.xml</param-value>
-        </init-param>
-        <!-- web 应用启动时候立即加载 Servlet -->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <!-- Servlet 映射声明 -->
-    <servlet-mapping>
-        <!-- 这里的名字要和上面的servlet-name 一致.
-         让SpringMVC 的前端控制器拦截所有请求。
-        -->
-        <!-- 请求对应的Servlet 名称 -->
-        <servlet-name>springmvc</servlet-name>
-        <!-- / 表示将当前所有的 URL映射到这个Servlet。 -->
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    <!-- Spring MVC 前端控制器  stop -->
-
+    <!-- 第一步： filter 配置 begin -->
     <!-- SpringMVC 统一编码过滤器配置 开始 -->
 
     <filter>
@@ -72,11 +34,53 @@
         </init-param>
     </filter>
     <!-- url-pattern配置为/*表示拦截客户端浏览器所有的请求；
-    其中在web容器启动的时候会调用CharacterEncodingFilter来实现将init-param中配置的参数记载进来
+    其中在web容器启动的时候会调用 CharacterEncodingFilter 来实现将init-param中配置的参数记载进来
     -->
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- SpringMVC 统一编码配置 结束 -->
+
+    <!-- filter 配置 stop -->
+
+    <!-- Spring MVC 前端Servlet转发器  Begin -->
+    <servlet>
+        <!-- Servlet 的名称 -->
+        <servlet-name>springmvc</servlet-name>
+        <!--Servlet 对应的实现类，当前使用SpringMVC 框架提供的前端控制器  -->
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--   当前Servlet初始化参数设置，参数值为SpringMVC配置文件路径，
+        如果这一步注释掉，则前端控制器的Spring-mvc 默认在WEB-INF目录下寻找映射文件，寻找路径为：/WEB-INF/[servlet-name]-servlet.xml ；
+        或者在 main/resources/springmvc-servlet.xml: 写成 classpath:springmvc-servlet.xml
+         -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/springmvc-servlet.xml</param-value>
+        </init-param>
+        <!-- web 应用启动时候立即加载 Servlet -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Servlet 映射声明 -->
+    <servlet-mapping>
+        <!-- 这里的名字要和上面的servlet-name 一致.
+         设置SpringMVC 的前端控制器的url匹配规则
+        -->
+        <!-- 请求对应的Servlet 名称 -->
+        <servlet-name>springmvc</servlet-name>
+        <!-- / 表示将当前 Servlet配置为默认Servlet，优先级最低  -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- Spring MVC 前端控制器  stop -->
+
+    <welcome-file-list>
+        <!-- 定义默认url 访问 的首页。安装文件名在webapp目录下 一个一个寻找直到找到同名的文件。  -->
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
