@@ -464,6 +464,7 @@
         <module>SpringMvc-Tutorial</module>
         <module>Struts2-Tutorial</module>
         <module>NativeJsp-Tutorial</module>
+        <module>urlpattern-tomcat-demo</module>
     </modules>
 
 

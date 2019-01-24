@@ -28,11 +28,9 @@
   <servlet-mapping>
     <servlet-name>newsServlet</servlet-name>
     <url-pattern>/newsA</url-pattern>
-    <!--<url-pattern>*.do</url-pattern>
-    <url-pattern>/newsA/*</url-pattern>-->
-
+    <!--<url-pattern>/newsA/*</url-pattern>-->
   </servlet-mapping>
-  
+
   <!-- 定义一个login servlet ，并通过font/userlist.jsp 返回登入login 的输入信息 -->
   <servlet>
     <servlet-name>registerServlet</servlet-name>

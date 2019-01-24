@@ -38,7 +38,7 @@ public class NewsServlet extends HttpServlet{
          *  解决办法是  page-header.jsp  应用的路径 通过 <%=basePath%> 绝对路径获得web app 的部署根目录
          * */
         req.setAttribute("news", news);
-
+        req.getRequestURL();
         req.getRequestDispatcher("font/newsFrontList.jsp").forward(req, resp);
         /** 重定向 浏览器有变化，但是接受不到servlet传递给他的数据 */
        // resp.sendRedirect("font/newsFrontList.jsp");
