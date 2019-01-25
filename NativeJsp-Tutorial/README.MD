@@ -210,6 +210,7 @@ JSP页面编译生成的Servlet放在`tomcat安装路径/work路径`对应的Web
 
 # 参考
 [基于SpringMVC 模式的简单mvc 控制器](https://books.brainysoftware.com/download)
+
 [Servlet的跳转有2种，一种是转发，一种是重定向。](https://www.cnblogs.com/LinkinPark/p/5233006.html)
    
 [JSP和Servlet传递数据的几种方式](https://blog.csdn.net/qq_38006520/article/details/81567379)
