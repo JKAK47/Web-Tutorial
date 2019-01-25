@@ -472,6 +472,7 @@
         <module>Struts2-Tutorial</module>
         <module>NativeJsp-Tutorial</module>
         <module>urlpattern-tomcat-demo</module>
+        <module>SpringMVC-Tutorial-Impl-01</module>
     </modules>
 
 
