@@ -207,6 +207,9 @@ jsp页面取值：
 每个JSP页面就是一个Servlet实例，每个JSP页面在第一次访问由Servlet容器编译成Servlet，生成的Servlet 负责响应用户请求 。JSP被编译成Servlet后生成请求响应Response ，响应体是标准的HTML字节流，输送到客户端。重点词：(标准 HTML 页面字节流)
 JSP页面编译生成的Servlet放在`tomcat安装路径/work路径`对应的Web应用目录下，
 
+
+# 参考
+[基于SpringMVC 模式的简单mvc 控制器](https://books.brainysoftware.com/download)
 [Servlet的跳转有2种，一种是转发，一种是重定向。](https://www.cnblogs.com/LinkinPark/p/5233006.html)
    
 [JSP和Servlet传递数据的几种方式](https://blog.csdn.net/qq_38006520/article/details/81567379)

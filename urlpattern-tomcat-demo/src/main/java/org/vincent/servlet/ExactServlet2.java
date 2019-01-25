@@ -19,7 +19,7 @@ public class ExactServlet2 extends HttpServlet{
 
 
             req.setAttribute("this", this.getClass().getSimpleName());
-            /* 应用上下玩*/
+            /* 应用上下文*/
             req.setAttribute("contextPath", req.getContextPath());
             /* 匹配到这个 Servlet 的url 中 去除ip:port/Context 部分后URL 剩下的部分
              * 比如 ：http://localhost:8888/urlpattern/exact.do
