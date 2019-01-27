@@ -97,6 +97,7 @@
         <servlet-name>ForwardServlet1</servlet-name>
         <url-pattern>/forwardservlet1</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ForwardServlet2</servlet-name>
         <servlet-class>org.vincent.servlet.forward.ForwardServlet2</servlet-class>
@@ -126,6 +127,13 @@
     </servlet-mapping>
     <!-- include stop -->
 
+    <!-- 声明式异常处理机制 -->
+   <!-- <error-page>
+        <exception-type>java.lang.NumberFormatException</exception-type>
+        <location>/WEB-INF/error/NumberFormateException.jsp</location>
+    </error-page>-->
+    <!-- 声明式异常处理机制 -->
+    
     <!-- 欢迎页面设置匹配规则 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

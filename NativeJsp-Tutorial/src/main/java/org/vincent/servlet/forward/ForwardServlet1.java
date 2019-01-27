@@ -1,6 +1,7 @@
 package org.vincent.servlet.forward;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -18,15 +19,20 @@ import java.io.PrintWriter;
  */
 public class ForwardServlet1 extends HttpServlet {
     @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         /**
          * set Cookie
          */
         Cookie cookie = new Cookie("myCookie", "myCookieValue");
-        cookie.setMaxAge(24*60*60);
+        cookie.setMaxAge(24 * 60 * 60);
         resp.addCookie(cookie);
 
-        resp.addCookie(new Cookie("key","vincent"));
+        resp.addCookie(new Cookie("key", "vincent"));
 
         PrintWriter writer = resp.getWriter();
         writer.write(this.getClass().getSimpleName());
@@ -35,9 +41,9 @@ public class ForwardServlet1 extends HttpServlet {
         // forward 方法必须在  flush， flushBuffer 方法之前 调用。
         dispatcher.forward(req, resp);
         // 刷新流
-        writer.flush();
+        //writer.flush();
         // 强制 刷新 buffer里面发送给client 的内容
-        resp.flushBuffer();
+        //  resp.flushBuffer();
 
     }
 

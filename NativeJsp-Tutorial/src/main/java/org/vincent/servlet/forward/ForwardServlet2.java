@@ -1,6 +1,5 @@
 package org.vincent.servlet.forward;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,15 +15,15 @@ import java.io.PrintWriter;
  */
 public class ForwardServlet2  extends HttpServlet{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
          PrintWriter writer=resp.getWriter();
          writer.write(this.getClass().getSimpleName());
-         writer.flush();
-         resp.flushBuffer();
+         //writer.flush();
+
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         doGet(req, resp);
     }
 }
