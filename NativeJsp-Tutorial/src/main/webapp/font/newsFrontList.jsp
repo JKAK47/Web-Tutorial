@@ -7,6 +7,7 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path;
     List<News> totalNew = (List<News>) session.getAttribute("news");
+    String URL=request.getRequestURL().toString();
 %>
 
 <!DOCTYPE html>
@@ -27,6 +28,7 @@
 </head>
 
 <body>
+<h3><%=URL%></h3>
 <%@ include file="page-header.jsp" %>
 
 <!--banner-->

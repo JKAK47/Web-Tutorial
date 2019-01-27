@@ -1,5 +1,6 @@
 package org.vincent.servlet;
 
+import com.sun.xml.internal.ws.api.pipe.ContentType;
 import org.vincent.dao.NewsDao;
 import org.vincent.dao.model.News;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -37,11 +39,23 @@ public class NewsServlet extends HttpServlet{
          * 但是页头对应的标题栏超链接失效，因为url 没有变化所以在 page-header.jsp 里面的页面相对路径失效
          *  解决办法是  page-header.jsp  应用的路径 通过 <%=basePath%> 绝对路径获得web app 的部署根目录
          * */
+        req.getClass();
+        req.getServletPath().lastIndexOf('/'); // /newsA index =0;  /newsA/aa
+        req.getPathInfo();// null ; null
         req.setAttribute("news", news);
-        req.getRequestURL();
+        System.out.println(req.getRequestURL().toString());
+        //http://localhost:8088/nativejsp/newsA
+        //http://localhost:8088/nativejsp/font/newsFrontList.jsp
+
+        //http://localhost:8088/nativejsp/newsA/aa
         req.getRequestDispatcher("font/newsFrontList.jsp").forward(req, resp);
+        /*PrintWriter writer =resp.getWriter();
+        resp.setContentType("text/html");
+        writer.write("<html><body>Get/POST</body></html>");
+        writer.flush();*/
         /** 重定向 浏览器有变化，但是接受不到servlet传递给他的数据 */
-       // resp.sendRedirect("font/newsFrontList.jsp");
+        //resp.sendRedirect("newsA?id=80&name=pengrong");
+        //resp.sendRedirect("http://www.baidu.com");
     }
 
     @Override

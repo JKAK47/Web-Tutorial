@@ -4,55 +4,135 @@
                 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
 
-  <!-- Servlet3.1 begin tomcat8.0.x
-          servlet 3.1 JSP 2.3, EL 3.0
-          -->
-  <!-- display-name 可有可无-->
-  <display-name>NativeJSP-WebApp</display-name>
+    <!-- Servlet3.1 begin tomcat8.0.x
+            servlet 3.1 JSP 2.3, EL 3.0
+            -->
+    <!-- display-name 可有可无-->
+    <display-name>NativeJSP-WebApp</display-name>
 
-  <!-- 定义全局变量 -->
-  <context-param>
-    <param-name>nativejsp</param-name>
-    <param-value>javaweb-100</param-value>
-  </context-param>
-  <!-- 定义一个处理 获取新闻数据的servlet
-    通过 /news访问
-    https://blog.csdn.net/icarus_wang/article/details/51649635
+    <!-- 定义全局变量 -->
+    <context-param>
+        <param-name>nativejsp</param-name>
+        <param-value>javaweb-100</param-value>
+    </context-param>
+    <!-- filter begin-->
+    <!-- gzip 压缩 filter -->
+    <filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>org.vincent.filter.gzip.GZipServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.css</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- gzip 压缩 filter -->
+    <filter>
+        <filter-name>oneFilter</filter-name>
+        <filter-class>org.vincent.filter.OneFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>oneFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- filter stop-->
 
-   -->
-  <servlet>
-    <servlet-name>newsServlet</servlet-name>
-    <servlet-class>org.vincent.servlet.NewsServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>newsServlet</servlet-name>
-    <url-pattern>/newsA</url-pattern>
-    <!--<url-pattern>/newsA/*</url-pattern>-->
-  </servlet-mapping>
+    <!-- 定义一个处理 获取新闻数据的servlet
+      通过 /news访问
+      https://blog.csdn.net/icarus_wang/article/details/51649635
 
-  <!-- 定义一个login servlet ，并通过font/userlist.jsp 返回登入login 的输入信息 -->
-  <servlet>
-    <servlet-name>registerServlet</servlet-name>
-    <servlet-class>org.vincent.servlet.RegisterServlet</servlet-class>
-    <init-param>
-      <param-name>registerone</param-name>
-      <param-value>50</param-value>
-    </init-param>
-    <load-on-startup>2</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>registerServlet</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
+     -->
+    <servlet>
+        <servlet-name>newsServlet</servlet-name>
+        <servlet-class>org.vincent.servlet.NewsServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>newsServlet</servlet-name>
+        <url-pattern>/newsA</url-pattern>
+        <!--<url-pattern>/newsA/*</url-pattern>-->
+    </servlet-mapping>
 
-  <!-- 欢迎页面设置匹配规则 -->
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-  </welcome-file-list>
+    <!-- 定义一个login servlet ，并通过font/userlist.jsp 返回登入login 的输入信息 -->
+    <servlet>
+        <servlet-name>registerServlet</servlet-name>
+        <servlet-class>org.vincent.servlet.RegisterServlet</servlet-class>
+        <init-param>
+            <param-name>registerone</param-name>
+            <param-value>50</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registerServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- forward begin-->
+    <servlet>
+        <servlet-name>ForwardServlet1</servlet-name>
+        <servlet-class>org.vincent.servlet.forward.ForwardServlet1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ForwardServlet1</servlet-name>
+        <url-pattern>/forwardservlet1</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ForwardServlet2</servlet-name>
+        <servlet-class>org.vincent.servlet.forward.ForwardServlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ForwardServlet2</servlet-name>
+        <url-pattern>/forwardservlet2</url-pattern>
+    </servlet-mapping>
+    <!-- forward stop-->
+
+    <!-- include begin-->
+    <servlet>
+        <servlet-name>IncludeServlet1</servlet-name>
+        <servlet-class>org.vincent.servlet.include.IncludeServlet1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IncludeServlet1</servlet-name>
+        <url-pattern>/includeservlet1</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>IncludeServlet2</servlet-name>
+        <servlet-class>org.vincent.servlet.include.IncludeServlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IncludeServlet2</servlet-name>
+        <url-pattern>/includeservlet2</url-pattern>
+    </servlet-mapping>
+    <!-- include stop -->
+
+    <!-- 欢迎页面设置匹配规则 -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+    </welcome-file-list>
 
 
 </web-app>
