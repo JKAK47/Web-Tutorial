@@ -23,6 +23,7 @@ public class NewsServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        // super.doGet(req, resp);
+
         req.setCharacterEncoding("utf-8");
         /** request 获取参数 */
         String id=req.getParameter("id");
@@ -40,6 +41,7 @@ public class NewsServlet extends HttpServlet{
          *  解决办法是  page-header.jsp  应用的路径 通过 <%=basePath%> 绝对路径获得web app 的部署根目录
          * */
         req.getClass();
+        req.getContextPath();
         req.getServletPath().lastIndexOf('/'); // /newsA index =0;  /newsA/aa
         req.getPathInfo();// null ; null
         req.setAttribute("news", news);
@@ -53,7 +55,7 @@ public class NewsServlet extends HttpServlet{
         resp.setContentType("text/html");
         writer.write("<html><body>Get/POST</body></html>");
         writer.flush();*/
-        /** 重定向 浏览器有变化，但是接受不到servlet传递给他的数据 */
+        /** 重定向 浏览器有变化，但是接受不到servlet传递给他的request级别数据 */
         //resp.sendRedirect("newsA?id=80&name=pengrong");
         //resp.sendRedirect("http://www.baidu.com");
     }

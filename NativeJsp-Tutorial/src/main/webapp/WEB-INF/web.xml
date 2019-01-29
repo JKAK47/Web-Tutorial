@@ -20,32 +20,33 @@
     <filter>
         <filter-name>GzipFilter</filter-name>
         <filter-class>org.vincent.filter.gzip.GZipServletFilter</filter-class>
+        <init-param>
+            <param-name>zipFilter</param-name>
+            <param-value>helloFilter</param-value>
+        </init-param>
+        <!-- 设置是否支持 异步 schema 语法校验有问题但是能启动web 应用 -->
+        <async-supported>true</async-supported>
     </filter>
     <filter-mapping>
         <filter-name>GzipFilter</filter-name>
         <url-pattern>*.js</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
         <url-pattern>*.css</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
         <url-pattern>*.html</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
         <url-pattern>/</url-pattern>
+        <!--<url-pattern>/*</url-pattern>-->
+        <!-- 对这个url-pattern 模式过滤器规则 只是过滤来自于原始客户端的请求进行过滤
+            总共有五个过滤场景：
+            REQUEST 过滤来自于客户端原始请求
+            FORWARD 过滤来自于RequestDispatcher.forward 调用分派过来的请求
+            INCLUDE 过滤来自于RequestDispatcher.include 调用分派过来的请求
+            ERROR 过滤 来自于错误页面机制的请求
+            ASYNC 过滤来自于 AsyncContext 分发过来的请求
+         -->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- 存在对forward 转发请求问题 -->
+    <!-- url-pattern : /* 存在对 forward 转发请求问题 -->
     <!-- gzip 压缩 filter -->
     <filter>
         <filter-name>oneFilter</filter-name>
@@ -129,12 +130,12 @@
     <!-- include stop -->
 
     <!-- 声明式异常处理机制 -->
-   <!-- <error-page>
-        <exception-type>java.lang.NumberFormatException</exception-type>
-        <location>/WEB-INF/error/NumberFormateException.jsp</location>
-    </error-page>-->
+    <!-- <error-page>
+         <exception-type>java.lang.NumberFormatException</exception-type>
+         <location>/WEB-INF/error/NumberFormateException.jsp</location>
+     </error-page>-->
     <!-- 声明式异常处理机制 -->
-    
+
     <!-- 欢迎页面设置匹配规则 -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

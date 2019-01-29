@@ -22,6 +22,7 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
     private PrintWriter printWriter = null;
 
     public GZipServletResponseWrapper(HttpServletResponse httpResponse) {
+        /* super 函数完成装饰器模式的职责，在父类中保存装饰对象的引用 ，被装饰对象是：HttpServletResponse*/
         super(httpResponse);
     }
 
@@ -72,8 +73,9 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
     /**
      * 将初始化 gzipOutputStream 获取到 GZipServletOutputStream 输出流( 字节方式)并不会初始化 printWriter。修改
      * ServletReponseWrapper.getOutputStream 接口方法 让他返回 GZipServletOutputStream 实现对 response 文本进行gzip 压缩
+     * getOutputStream方法和 getWriter 方法只能二选一
      * @return
-     * @throws IOException 如果 printWriter实例不为空将抛 异常。默认是需要先获取OutputStream 字节流方式 才可以获取字符流方式
+     * @throws IOException 仅当servlet还没有获取PrintWriter 打印书写器时才可以获取输出流
      */
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
@@ -98,6 +100,8 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
             throw new IllegalStateException("OutputStream obtained already - cannot get PrintWriter");
         }
         if (this.printWriter == null) {
+            /*获取打印书写器 第一步：获取 servlet包装输出流
+             * 第二步： 将包装输出流 用 OutputStreamWriter,PrintWriter 两个包装器类 转成 字符输出流 */
             this.gzipOutputStream = new GZipServletOutputStream(getResponse().getOutputStream());
             this.printWriter = new PrintWriter(new OutputStreamWriter(this.gzipOutputStream, getResponse().getCharacterEncoding()));
         }

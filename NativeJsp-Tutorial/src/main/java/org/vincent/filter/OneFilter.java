@@ -52,9 +52,9 @@ public class OneFilter implements Filter {
         request.setAttribute("onefilter", "onefilter-value");
         response.setContentType("text/plain;charset=UTF-8");
         /**
-         * 检查request 的 url 查询参数是否是  blockTheRequest，
-         * 如果不是通过 chain.doFilter 方法将 request 转发到目标 servlet,
-         * 如果是不执行 chain.doFilter 方法，将拦截request
+         * 检查request 的 url 查询参数myParam是否是  blockTheRequest，
+         * 如果不是 通过 chain.doFilter 方法将 request 转发到目标 servlet,
+         * 如果是 不执行 chain.doFilter 方法，将拦截request请求，request只能到这个请求这里
          */
 
         String myParam = request.getParameter("myParam");
@@ -63,6 +63,7 @@ public class OneFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+        /* 不通过 chain.doFilter 转发 ，拦截请求*/
         PrintWriter printWriter = response.getWriter();
         //获取当前的字符编码
         String CurCharacterEncoding = response.getCharacterEncoding();
