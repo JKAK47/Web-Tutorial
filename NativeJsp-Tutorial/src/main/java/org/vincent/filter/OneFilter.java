@@ -3,6 +3,7 @@ package org.vincent.filter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -18,6 +19,9 @@ import java.io.PrintWriter;
  * @Description: ServletFilter 实现
  */
 public class OneFilter implements Filter {
+    private FilterConfig filterConfig;
+    private ServletContext servletContext;
+
     /**
      * init 方法由web容器调用，在Filter 实例化成功后调用一次；在filter 执行任何过滤逻辑前这个方法必须执行成功。
      * 容器通过FilterConfig向Filter传递Filter配置参数； 可以获取这个Filter 的name，以及初始化参数 InitParameter
@@ -28,7 +32,9 @@ public class OneFilter implements Filter {
      */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("SimpleClassName: "+this.getClass().getSimpleName()+"\t"+"oneFilter init");
+        this.filterConfig=filterConfig;
+        servletContext=filterConfig.getServletContext();
+        servletContext.log("SimpleClassName: "+this.getClass().getSimpleName()+"\t"+"oneFilter init");
         filterConfig.getServletContext();
     }
 
@@ -59,6 +65,7 @@ public class OneFilter implements Filter {
 
         String myParam = request.getParameter("myParam");
         if (!"blockTheRequest".equals(myParam)) {
+            servletContext.log("SimpleClassName: "+this.getClass().getSimpleName()+" filterName: "+this.filterConfig.getFilterName());
             /** 触发filter 链上的下一个filter 被调用  */
             chain.doFilter(request, response);
             return;
