@@ -35,7 +35,7 @@
         <url-pattern>*.jsp</url-pattern>
         <!-- url-pattern : /* 存在对 forward 转发请求问题 -->
         <url-pattern>/</url-pattern>
-        <!--<url-pattern>/*</url-pattern>-->
+        <url-pattern>/*</url-pattern>
         <!-- 对这个url-pattern 模式过滤器规则 只是过滤来自于原始客户端的请求进行过滤
             总共有五个过滤场景：
             REQUEST 过滤来自于客户端原始请求
@@ -45,7 +45,7 @@
             ASYNC 过滤来自于 AsyncContext 分发过来的请求
          -->
         <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
+        <!--<dispatcher>FORWARD</dispatcher>-->
     </filter-mapping>
 
     <!-- gzip 压缩 filter -->
@@ -55,7 +55,7 @@
     </filter>
     <filter-mapping>
         <filter-name>oneFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </filter-mapping>
     <!-- filter stop-->
 

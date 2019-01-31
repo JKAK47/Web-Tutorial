@@ -3,6 +3,7 @@ package org.vincent.filter.gzip;
 import javax.servlet.ServletOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -14,7 +15,14 @@ import java.util.zip.GZIPOutputStream;
  */
 public class GZipServletOutputStream extends ServletOutputStream {
     private GZIPOutputStream gzipOutputStream = null;
+    /* 流是否打开的标识  */
+    final AtomicBoolean openFlag = new AtomicBoolean(true);
 
+    /**
+     *
+     * @param output 输出流
+     * @throws IOException
+     */
     public GZipServletOutputStream(OutputStream output)
             throws IOException {
         super();
@@ -23,7 +31,9 @@ public class GZipServletOutputStream extends ServletOutputStream {
 
     @Override
     public void close() throws IOException {
-        this.gzipOutputStream.close();
+        if (openFlag.compareAndSet(true, false)) {
+            this.gzipOutputStream.close();
+        }
     }
 
     @Override
@@ -33,16 +43,26 @@ public class GZipServletOutputStream extends ServletOutputStream {
 
     @Override
     public void write(byte b[]) throws IOException {
-        this.gzipOutputStream.write(b);
+        if (b != null) {
+            this.write(b, 0, b.length);
+        }
     }
 
     @Override
     public void write(byte b[], int off, int len) throws IOException {
-        this.gzipOutputStream.write(b, off, len);
+        if (openFlag.get()) {
+            this.gzipOutputStream.write(b, off, len);
+        } else {
+            throw new IOException("Stream closed!");
+        }
     }
 
     @Override
     public void write(int b) throws IOException {
-        this.gzipOutputStream.write(b);
+        if (openFlag.get()) {
+            this.gzipOutputStream.write(b);
+        } else {
+            throw new IOException("Stream closed!");
+        }
     }
 }

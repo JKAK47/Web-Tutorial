@@ -68,7 +68,7 @@ public class OneFilter implements Filter {
             servletContext.log("SimpleClassName: "+this.getClass().getSimpleName()+" filterName: "+this.filterConfig.getFilterName());
             /** 触发filter 链上的下一个filter 被调用  */
             chain.doFilter(request, response);
-            return;
+
         }
         /* 不通过 chain.doFilter 转发 ，拦截请求*/
         PrintWriter printWriter = response.getWriter();
@@ -80,7 +80,7 @@ public class OneFilter implements Filter {
         printWriter.write("你错了");
         printWriter.flush();
         response.flushBuffer();
-        return;
+
     }
 
     /**

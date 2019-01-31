@@ -108,9 +108,4 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
         return this.printWriter;
     }
 
-    @Override
-    public void setContentLength(int len) {
-        //ignore, since content length of zipped content
-        //does not match content length of unzipped content.
-    }
 }

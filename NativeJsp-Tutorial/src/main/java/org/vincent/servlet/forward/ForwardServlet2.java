@@ -13,12 +13,12 @@ import java.io.PrintWriter;
  * @ProjectName Web-Tutorial
  * @Description: 用于测试forward 方法 转发 最终页面是否有第一个servlet输出的结果
  */
-public class ForwardServlet2  extends HttpServlet{
+public class ForwardServlet2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-         PrintWriter writer=resp.getWriter();
-         writer.write(this.getClass().getSimpleName());
-         //writer.flush();
+        PrintWriter writer = resp.getWriter();
+        writer.write(this.getClass().getSimpleName());
+        //writer.flush();
 
     }
 

@@ -73,10 +73,12 @@ public class GZipServletFilter implements Filter {
             GZipServletResponseWrapper gzipResponse = new GZipServletResponseWrapper(httpResponse);
             /*FilterChain.doFilter接口 存在的意义是调用 那个filter.doFilter方法 或者 链尾的 Servlet 转发到  请求的servlet 进行真正的业务处理  */
             chain.doFilter(request, gzipResponse);
+
             gzipResponse.flushBuffer();
-            /* 处理完后关闭 输出流 */
+            //* 处理完后关闭 输出流 *//
             gzipResponse.close();
             servletContext.log(filterConfig.getFilterName() + " finished the request.");
+            return;
         } else {
             servletContext.log(filterConfig.getFilterName() + " no encoding performed.");
             /* 浏览器不接受 对文本压缩就 直接跳过，直接转发给Servlet */
