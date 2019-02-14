@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
         /* 获取 key 对应的 一组值， 对应前端是checkbox 多选框选定的值 */
         String[] interest = req.getParameterValues("interest");
         String msg = req.getParameter("msg");
-        /* 获取query 查询参数另外一种方式*/
+        /* 获取query 查询参数另外一种方式，先获取到所有参数的名称，然后获取到value */
         Enumeration<String> enumerations = req.getParameterNames();
         while (enumerations.hasMoreElements()) {
             String key = enumerations.nextElement();
@@ -88,7 +88,7 @@ public class RegisterServlet extends HttpServlet {
 
         req.setAttribute("USERLIST", userBean);
         req.getRequestURL();
-        req.getRequestURI();
+        req.getRequestURI();/* 返回请求URL 字符串一部分，返回的是 http请求行第一行 第二部分指示：路径 */
         /* 转发给 另外一个jsp  */
         req.getRequestDispatcher("font/userlist.jsp").forward(req, resp);
         /* 路径必须以 / 符号开始 解析为相对context root 目录下 */
