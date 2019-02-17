@@ -15,15 +15,15 @@
 <%-- 调用 servlet = RegisterServlet 的后台处理类
     action="../register" 这样写 是因为 login.jsp 在 webapp\admin\目录下，在web 根目录下admin子目录
     所以你要访问映射到根目录下的 register servlet服务，直接通过浏览器 URL = http://localhost:8088/nativejsp/register访问
-    那么在login.jsp这里你要访问根目录下的  register Servlet 服务，是不是就是要通过  ../register 访问。
+    那么在login.jsp(webapp/admin/目录下)这里你要访问根目录下的  register Servlet 服务，是不是就是要通过  ../register 访问。
     action="register" 最后访问的路径 是 ： http://localhost:8080/nativejsp/admin/register
     action="/register"  最后访问的路径 是 ： http://localhost:8080/register
-
+    表单中 action属性设置 表示当前页面相对于web应用的跟
  --%>
 <form method="post" action="../register">
     注册页面
     <table>
-        <!-- 第一行 -->
+        <!-- 第一行 文本输入框 -->
         <tr>
             <td>
                 账户：
@@ -32,7 +32,7 @@
                 <input type="text" name="account"/>
             </td>
         </tr>
-        <!-- 第二行 -->
+        <!-- 第二行 文本输入框 -->
         <tr>
             <td>
                 姓名：
@@ -41,7 +41,7 @@
                 <input type="text" name="name"/>
             </td>
         </tr>
-        <!-- 第三行 -->
+        <!-- 第三行 单选框 -->
         <tr>
             <td>
                 性别：
@@ -53,7 +53,7 @@
                 </select>
             </td>
         </tr>
-        <!-- 第四行 -->
+        <!-- 第四行 复选框 -->
         <tr>
             <td>
                 爱好：
@@ -64,7 +64,7 @@
                 <input type="checkbox" name="interest" value="打豆豆"/>打豆豆
             </td>
         </tr>
-        <!-- 第五行 -->
+        <!-- 第五行  文本区域 -->
         <tr>
             <td>
                 简介：

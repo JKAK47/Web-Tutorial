@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Objects;
 
@@ -27,6 +28,11 @@ import java.util.Objects;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRemotePort();//获取该请求客户端线程的端口Port
+        req.getServerPort();//服务器监听的端口
+        req.getLocalPort();// 服务器为内个请求建立的socket 端口处理响应的端口，多线程请求下给每个请求分配端口
+        PrintWriter writer=resp.getWriter();
+
         /** ServletContext 使用场景 */
         /* 1、 获取在web.xml 通过context-param元素定义的全局变量  */
         String nativejsp = this.getServletContext().getInitParameter("nativejsp");
@@ -50,16 +56,21 @@ public class RegisterServlet extends HttpServlet {
         this.getServletContext().getResource("/");
         /* ServletContext 属性 */
         this.getServletContext().setAttribute("ServletContextKey","ServletContextValue");
+
         /** ServletContext 使用场景 end  */
 
         /* 获取Servlet 初始化定义的变量 */
         String registerone = this.getServletConfig().getInitParameter("registerone");
-
+        /** ServletContext 使用场景 结束 */
         String id = req.getSession().getId();
         req.setCharacterEncoding("utf-8");
         resp.getClass();
         resp.setContentType("text/html;charset=utf-8");
-        /* 获取 query 查询参数  ?id=10&name=20 形式参数 */
+        /* 获取 post 请求提交的请求参数数据
+         * req.getParameter 可以获取GET请求提交的请求字符串(?account=dfasd&name=sdfasdfasdfa&gender=M&interest=吃饭&interest=睡觉&msg=asdfasdfas)
+         * req.getParameter 可以获取POST请求提交的请求体的参数，请求体表单参数(account=sdfasdfsadf&name=asdfasdfasdfas&gender=M&interest=%E5%90%83%E9%A5%AD&interest=%E6%89%93%E8%B1%86%E8%B1%86&msg=asfdfasdfSfaeqwrer)
+         * 两个请求方法获取参数方式都是一样的
+          * */
         String account = req.getParameter("account");
         String name = req.getParameter("name");
         String gender = req.getParameter("gender");
@@ -72,7 +83,7 @@ public class RegisterServlet extends HttpServlet {
             String key = enumerations.nextElement();
             System.out.println("key: " + key + ",\tvalue: " + req.getParameter(key));
         }
-        /* 获取Http Header */
+        /* 获取Http Header，并输出request header  */
         Enumeration<String>  headers = req.getHeaderNames();
         while (headers.hasMoreElements()){
             String headerkey =headers.nextElement();
