@@ -3,6 +3,7 @@ package org.vincent.servlet;
 import org.vincent.dao.model.UserBean;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,10 +29,11 @@ import java.util.Objects;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //super.doGet(req, resp); // 调用父类的doGet方法 将报错 java.lang.IllegalStateException: Cannot forward after response has been committe 响应提交之后再次执行forward方法有问题
         req.getRemotePort();//获取该请求客户端线程的端口Port
         req.getServerPort();//服务器监听的端口
         req.getLocalPort();// 服务器为内个请求建立的socket 端口处理响应的端口，多线程请求下给每个请求分配端口
-        PrintWriter writer=resp.getWriter();
+       // PrintWriter writer=resp.getWriter(); // 该语句必须放在最后输出响应时候才能写，如果写在这里会有问题，浏览器不能获取到响应。
 
         /** ServletContext 使用场景 */
         /* 1、 获取在web.xml 通过context-param元素定义的全局变量  */
@@ -95,7 +97,8 @@ public class RegisterServlet extends HttpServlet {
         userBean.setGender(gender);
         userBean.setInterest(interest);
         userBean.setMsg(msg);
-
+        /*ServletOutputStream outputStream=resp.getOutputStream();
+        PrintWriter writer =resp.getWriter();*/
 
         req.setAttribute("USERLIST", userBean);
         req.getRequestURL();
