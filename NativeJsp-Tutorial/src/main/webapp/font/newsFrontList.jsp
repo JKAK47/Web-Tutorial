@@ -2,6 +2,7 @@
 <%@ page import="org.vincent.dao.model.News" %>
 <%--<%@ page import="com.mingrisoft.*"%>--%>
 <%
+
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
