@@ -1,6 +1,7 @@
 package org.vincent.servlet;
 
 import org.vincent.dao.model.UserBean;
+import org.vincent.listener.MyHttpSessionBindObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -58,13 +59,14 @@ public class RegisterServlet extends HttpServlet {
         this.getServletContext().getResource("/");
         /* ServletContext 属性 */
         this.getServletContext().setAttribute("ServletContextKey","ServletContextValue");
-
+        this.getServletContext().removeAttribute("context-listentr");
         /** ServletContext 使用场景 end  */
-
+        req.getSession().getAttribute("sdf");
         /* 获取Servlet 初始化定义的变量 */
         String registerone = this.getServletConfig().getInitParameter("registerone");
         /** ServletContext 使用场景 结束 */
         String id = req.getSession().getId();
+        req.getSession().setAttribute("MyHttpSessionBindObject", new MyHttpSessionBindObject());
         req.setCharacterEncoding("utf-8");
         resp.getClass();
         resp.setContentType("text/html;charset=utf-8");
