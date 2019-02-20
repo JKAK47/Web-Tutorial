@@ -57,6 +57,11 @@
         <filter-name>oneFilter</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
+    <!-- listener setting-->
+    <!-- listener 监听 ServletContext 初始化和销毁  -->
+    <listener>
+        <listener-class>org.vincent.listener.MyServletContextListener</listener-class>
+    </listener>
     <!-- filter stop-->
 
     <!-- 定义一个处理 获取新闻数据的servlet
