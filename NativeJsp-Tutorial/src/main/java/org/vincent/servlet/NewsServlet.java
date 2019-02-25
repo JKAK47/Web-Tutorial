@@ -1,6 +1,5 @@
 package org.vincent.servlet;
 
-import com.sun.xml.internal.ws.api.pipe.ContentType;
 import org.vincent.dao.NewsDao;
 import org.vincent.dao.model.News;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -36,6 +34,7 @@ public class NewsServlet extends HttpServlet{
         NewsDao dao =new NewsDao();
         List<News> news =dao.querys();
         req.getSession().setAttribute("news", news);
+
         /** 转发 浏览器url没有变化，jsp 页面可以取出servlet 传递的request域的值
          * 但是页头对应的标题栏超链接失效，因为url 没有变化所以在 page-header.jsp 里面的页面相对路径失效
          *  解决办法是  page-header.jsp  应用的路径 通过 <%=basePath%> 绝对路径获得web app 的部署根目录

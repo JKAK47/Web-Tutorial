@@ -142,23 +142,23 @@
             <!--自动部署  有个问题是启动后没有给出访问URL
                 首页: http://localhost:8080/springmvc-tutorial/
              -->
-            <plugin>
+          <!--  <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <configuration>
                     <container>
-                        <!-- 指明使用的tomcat服务器版本 启动的是 8.0.53 版本tomcat 容器 -->
+                        &lt;!&ndash; 指明使用的tomcat服务器版本 启动的是 8.0.53 版本tomcat 容器 &ndash;&gt;
                         <containerId>tomcat7x</containerId>
-                        <!--指明tomcat服务器的安装目录 -->
+                        &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
                         <home>${tomcat.basedir}</home>
                     </container>
                     <configuration>
                         <type>existing</type>
-                        <!--指明tomcat服务器的安装目录 -->
+                        &lt;!&ndash;指明tomcat服务器的安装目录 &ndash;&gt;
                         <home>${tomcat.basedir}</home>
                     </configuration>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

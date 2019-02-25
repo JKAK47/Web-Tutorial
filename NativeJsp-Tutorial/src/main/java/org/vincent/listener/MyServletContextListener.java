@@ -3,6 +3,7 @@ package org.vincent.listener;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.SessionCookieConfig;
 import javax.servlet.annotation.WebListener;
 
 /**
@@ -25,8 +26,9 @@ public class MyServletContextListener implements ServletContextListener{
         ServletContext context=sce.getServletContext();
         System.out.println("设置监听器属性属性,ServletContext开始初始化");
         context.setAttribute("context-listentr", "asdfsd");
-        //这里就将Tomcat默认的JSESSIONID改成了my-sessionId了
-        context.getSessionCookieConfig().setName("my-sessionId");
+        // SessionCookieConfig 类用于配置许多Cookie 属性用于 session 会话跟踪
+       // SessionCookieConfig config =context.getSessionCookieConfig();
+        //config.setName("my-sessionId");
 
     }
 

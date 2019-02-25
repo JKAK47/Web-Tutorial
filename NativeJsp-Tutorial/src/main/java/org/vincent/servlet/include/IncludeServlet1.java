@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,6 +20,11 @@ import java.io.PrintWriter;
 public class IncludeServlet1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 返回跟当前request 关联的httpsession ，如果没有现成的，则返回null .
+        HttpSession session = req.getSession(false);
+
+        session.isNew();
+        session.getCreationTime();
         req.getAttribute("onefilter");
         resp.getContentType();
         /**

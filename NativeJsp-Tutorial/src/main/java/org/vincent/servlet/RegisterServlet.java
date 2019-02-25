@@ -4,15 +4,11 @@ import org.vincent.dao.model.UserBean;
 import org.vincent.listener.MyHttpSessionBindObject;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Objects;
 
@@ -30,12 +26,17 @@ import java.util.Objects;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // URL重写，
+        resp.encodeURL("/index1/index");
+        resp.encodeRedirectURL("/index1/index");
         //super.doGet(req, resp); // 调用父类的doGet方法 将报错 java.lang.IllegalStateException: Cannot forward after response has been committe 响应提交之后再次执行forward方法有问题
         req.getRemotePort();//获取该请求客户端线程的端口Port
         req.getServerPort();//服务器监听的端口
         req.getLocalPort();// 服务器为内个请求建立的socket 端口处理响应的端口，多线程请求下给每个请求分配端口
        // PrintWriter writer=resp.getWriter(); // 该语句必须放在最后输出响应时候才能写，如果写在这里会有问题，浏览器不能获取到响应。
-
+        // 应用上下文名称路径 ：/nativejsp
+        req.getContextPath();
+        getServletContext().getContextPath();
         /** ServletContext 使用场景 */
         /* 1、 获取在web.xml 通过context-param元素定义的全局变量  */
         String nativejsp = this.getServletContext().getInitParameter("nativejsp");
@@ -59,7 +60,7 @@ public class RegisterServlet extends HttpServlet {
         this.getServletContext().getResource("/");
         /* ServletContext 属性 */
         this.getServletContext().setAttribute("ServletContextKey","ServletContextValue");
-        this.getServletContext().removeAttribute("context-listentr");
+        //this.getServletContext().removeAttribute("context-listentr");
         /** ServletContext 使用场景 end  */
         req.getSession().getAttribute("sdf");
         /* 获取Servlet 初始化定义的变量 */
@@ -68,7 +69,11 @@ public class RegisterServlet extends HttpServlet {
         String id = req.getSession().getId();
         req.getSession().setAttribute("MyHttpSessionBindObject", new MyHttpSessionBindObject());
         req.setCharacterEncoding("utf-8");
-        resp.getClass();
+/*
+        HttpSession session = req.getSession();
+        session.invalidate();
+        session.getAttribute("MyHttpSessionBindObject");
+*/
         resp.setContentType("text/html;charset=utf-8");
         /* 获取 post 请求提交的请求参数数据
          * req.getParameter 可以获取GET请求提交的请求字符串(?account=dfasd&name=sdfasdfasdfa&gender=M&interest=吃饭&interest=睡觉&msg=asdfasdfas)

@@ -24,6 +24,7 @@ public class MyHttpSessionListener implements HttpSessionListener  {
      */
     @Override
     public void sessionCreated(HttpSessionEvent  se) {
+        se.getSession().getMaxInactiveInterval();
         System.out.println("create session : "+se.getSession().getId());
         ServletContext ctx = se.getSession().getServletContext();
         Integer numSessions = (Integer) ctx.getAttribute("numSessions");

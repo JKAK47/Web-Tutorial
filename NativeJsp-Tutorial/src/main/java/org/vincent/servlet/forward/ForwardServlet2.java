@@ -3,6 +3,7 @@ package org.vincent.servlet.forward;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -17,7 +18,13 @@ public class ForwardServlet2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
-        writer.write(this.getClass().getSimpleName());
+        HttpSession session =req.getSession();
+        session.setAttribute("foo", "sdfqwese");
+        String FOO ="";
+        // 失效 session 后 再次获取属性报错： java.lang.IllegalStateException: getAttribute: Session already invalidated
+        //session.invalidate();
+        //FOO = (String) session.getAttribute("foo");
+        writer.write(this.getClass().getSimpleName()+FOO);
         //writer.flush();
 
     }
