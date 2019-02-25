@@ -22,7 +22,8 @@ import java.util.Objects;
 /*@WebServlet(name = "asdf",urlPatterns = {"/sdf","/sdf"}, loadOnStartup = 0,
         initParams = {
         @WebInitParam(name = "key1",value = "asdfasd"),
-        @WebInitParam(name = "key2",value = "sdfas")})*/
+        @WebInitParam(name = "key2",value = "sdfas")})
+        */
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,0 +1,7 @@
+<!-- 配置 session 持久化的 超时时间和 持久化目录 。-->
+<Context>
+    <Manager className="org.apache.catalina.session.PersistentManager" maxIdleSwap="1">
+        <!-- session 持久化目录  -->
+        <Store className="org.apache.catalina.session.FileStore" directory="stono" />
+    </Manager>
+</Context>
