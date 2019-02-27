@@ -25,7 +25,8 @@ import java.io.PrintWriter;
                 @WebInitParam(name = "SessionActivationListenerTestServlet-1",value ="SessionActivationListenerTestServlet-1-value" ),
                 @WebInitParam(name = "SessionActivationListenerTestServlet-2",value ="SessionActivationListenerTestServlet-2-value" ),
                 @WebInitParam(name = "SessionActivationListenerTestServlet-3",value ="SessionActivationListenerTestServlet-3-value" )
-        }
+        },
+        loadOnStartup = 0
 )
 public class HttpSessionActivationListenerTestServlet  extends HttpServlet{
     @Override

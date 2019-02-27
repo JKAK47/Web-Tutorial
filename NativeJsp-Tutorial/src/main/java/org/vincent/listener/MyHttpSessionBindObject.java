@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSessionBindingListener;
  * @ProjectName Web-Tutorial
  * @Description: HttpSessionBindingListener 监听器是用于
  * 当一个普通java 类被 添加到 httpsession 作为属性或者从httpsession 中删除时 希望可以被通知到，则实现 HttpSessionBindingListener 接口
- * 实现  HttpSessionBindingListener 接口的 类不需要 注解 @WebListener 标记该类未listener，或者在web.xml中使用 <listener></listener> 标签 注册listener
  */
 public class MyHttpSessionBindObject implements HttpSessionBindingListener {
     @Override
