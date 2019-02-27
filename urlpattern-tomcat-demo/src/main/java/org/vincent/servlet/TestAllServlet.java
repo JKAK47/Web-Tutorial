@@ -13,7 +13,7 @@ import java.io.IOException;
  * @ProjectName Web-Tutorial
  * @Description: TODO
  */
-public class TestAllServlet extends HttpServlet{
+public class TestAllServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("this", this.getClass().getSimpleName());
@@ -25,7 +25,7 @@ public class TestAllServlet extends HttpServlet{
          * servletPath: /exact.do
          * */
         req.setAttribute("servletPath", req.getServletPath());
-        req.getRequestDispatcher("WEB-INF/pages/info.jsp").forward(req, resp);
+        // req.getRequestDispatcher("WEB-INF/pages/info.jsp").forward(req, resp);
 
     }
 

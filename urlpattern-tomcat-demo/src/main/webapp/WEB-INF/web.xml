@@ -8,8 +8,9 @@
            -->
     <!-- this.getServletContext().getServletContextName() 输出 display-name 标签的值 -->
     <display-name>UrlPattern Web Application</display-name>
+    <!-- #################################################################################### -->
     <!-- 精确匹配 案例 -->
-
+    <!-- url 必须和 url-pattenr 设置的一模一样 http://localhost:8888/urlpattern/vincent/exact.do -->
     <servlet>
         <servlet-name>ExactServlet</servlet-name>
         <servlet-class>org.vincent.servlet.ExactServlet</servlet-class>
@@ -18,29 +19,55 @@
         <servlet-name>ExactServlet</servlet-name>
         <url-pattern>/vincent/exact.do</url-pattern>
     </servlet-mapping>
+    <!-- 精确匹配 案例 -->
+    <!-- #################################################################################### -->
 
+    <!-- #######################################目录匹配############################################# -->
+    <!--短路径匹配-->
     <servlet>
-        <servlet-name>ExactServlet2</servlet-name>
-        <servlet-class>org.vincent.servlet.ExactServlet2</servlet-class>
+        <servlet-name>dirshort</servlet-name>
+        <servlet-class>org.vincent.servlet.dir.DirUrlPatternShortServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ExactServlet2</servlet-name>
-        <url-pattern>/vincent/exact2.do</url-pattern>
+        <servlet-name>dirshort</servlet-name>
+        <url-pattern>/vincent/dir/*</url-pattern>
     </servlet-mapping>
-    <!-- 精确匹配 案例 -->
-    
+    <!--长路径匹配-->
+    <servlet>
+        <servlet-name>dirlong</servlet-name>
+        <servlet-class>org.vincent.servlet.dir.DirUrlPatternLongServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dirlong</servlet-name>
+        <url-pattern>/vincent/dir/v1/*</url-pattern>
+    </servlet-mapping>
+    <!-- #######################################目录匹配############################################# -->
+
+    <!-- #######################################扩展名匹配############################################# -->
+    <!-- 所有以 .do结尾的url 都会转发到这个servlet处理  -->
+    <servlet>
+        <servlet-name>ext</servlet-name>
+        <servlet-class>org.vincent.servlet.ext.ExtendServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ext</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <!-- #######################################扩展名匹配############################################# -->
     <!-- 路径匹配
      /vincent/* 陷入死循环
      /vincent/ab/* 也会陷入死循环
      -->
-   <!-- <servlet>
-        <servlet-name>wildcardServlet</servlet-name>
-        <servlet-class>org.vincent.servlet.TestAllServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>wildcardServlet</servlet-name>
-        <url-pattern>/vincent/ab/*</url-pattern>
-    </servlet-mapping>-->
+    <!-- <servlet>
+         <servlet-name>wildcardServlet</servlet-name>
+         <servlet-class>org.vincent.servlet.TestAllServlet</servlet-class>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>wildcardServlet</servlet-name>
+         <url-pattern>/vincent/ab/*</url-pattern>
+     </servlet-mapping>-->
+
+    <!-- #################################################################################### -->
     <!-- 默认匹配 -->
     <servlet>
         <servlet-name>defaultServlet</servlet-name>
@@ -50,4 +77,5 @@
         <servlet-name>defaultServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!-- #################################################################################### -->
 </web-app>
