@@ -16,7 +16,7 @@ import java.io.PrintWriter;
  * 匹配 URL
  * http://localhost:8888/urlpattern/vincent/dir/v1/asdf.do ( 长路径匹配模式 /vincent/dir/v1/* 比 短路径匹配模式 /vincent/dir/* ,该URL 能匹配到长路径匹配模式，将优先匹配到路径模式中长路径模式)
  * http://localhost:8888/urlpattern/vincent/dir/v12/asdf.do 如果只有长路径匹配，将不匹配路径匹配，只匹配扩展名匹配，所以通过扩展匹配Servlet处理
- * http://localhost:8888/urlpattern/vincent/dir/v12/asdf.do 但是一旦加了短路径匹配后，将匹配路径匹配，不匹配扩展名匹配
+ * http://localhost:8888/urlpattern/vincent/dir/v12/asdf.do 但是一旦加入了短路径匹配后，将匹配 "路径匹配" ，不匹配扩展名匹配
  */
 public class DirUrlPatternShortServlet extends HttpServlet {
     @Override

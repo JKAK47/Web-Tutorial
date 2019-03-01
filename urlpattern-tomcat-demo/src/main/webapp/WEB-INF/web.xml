@@ -78,4 +78,28 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- #################################################################################### -->
+    <!-- 设定默认欢迎文件， 在welcome-file-list 中默认的根目录是webapp 目录。
+        如果你需要指定具体的其他路径 ，比如/WEB-INF/目录下的jsp 文件
+        jsp资源路径 :  /WEB-INF/jsp/hello.jsp
+
+          -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- 错误异常处理 -->
+    <!-- 当浏览器访问资源文件未找到,
+        无默认匹配才有机会报这个错误，如果有默认匹配，不能找到的资源优先匹配 默认匹配
+     -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error/errorPage.jsp</location>
+    </error-page>
+    <!-- servlet 抛异常 异常处理页面  -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/error/throwable.jsp</location>
+    </error-page>
 </web-app>
