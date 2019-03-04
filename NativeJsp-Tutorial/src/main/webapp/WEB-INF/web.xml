@@ -67,6 +67,8 @@
     <!-- listener setting-->
     <!-- listener 监听 ServletContext 初始化和销毁  -->
     <!--<listener>
+        &lt;!&ndash; 定义listener 监听器描述符 &ndash;&gt;
+        <display-name>MyServletContextListener</display-name>
         <listener-class>org.vincent.listener.MyServletContextListener</listener-class>
     </listener>-->
     <!-- filter stop-->

@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebListener;
  * @ProjectName Web-Tutorial
  * @Description: MyServletContextListener 监听器，需要在web.xml 注册 设置,或者 @WebListener 注解标注即可
  */
-@WebListener
+@WebListener(value = "MyServletContextListener")
 public class MyServletContextListener implements ServletContextListener{
     /**
      * 当web应用初始化进程开始的时候，回调这个方法，

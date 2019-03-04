@@ -68,12 +68,13 @@ public class GZipServletFilter implements Filter {
             /** 接受就可以对文本内容压缩*/
             /* 第一步 设置响应头表示对文本使用了gzip 压缩*/
             httpResponse.addHeader("Content-Encoding", "gzip");
-            /* 第二步 将 HttpServletResponse 响应类 使用包装器 包装到 GZipServletResponseWrapper 类，增加功能，并重写 getOutputStream，getWriter 两个方法 将
-             * Gzip 功能添加进去 */
+            /* 第二步 将 HttpServletResponse 响应类 使用包装器 包装到 GZipServletResponseWrapper 类，增加GZip功能，并重写父类ServletResponseWrapper中的两个方法：
+             getOutputStream，getWriter 两个方法 将Gzip 功能添加进去
+              * */
             GZipServletResponseWrapper gzipResponse = new GZipServletResponseWrapper(httpResponse);
-            /*FilterChain.doFilter接口 存在的意义是调用 那个filter.doFilter方法 或者 链尾的 Servlet 转发到  请求的servlet 进行真正的业务处理  */
+            /*FilterChain.doFilter接口 存在的意义是调用下一个 filter.doFilter方法 或者 链尾的 Servlet 转发到  请求的servlet 进行真正的业务处理  */
             chain.doFilter(request, gzipResponse);
-
+            /** GZip压缩流刷新并关闭 */
             gzipResponse.flushBuffer();
             //* 处理完后关闭 输出流 *//
             gzipResponse.close();
@@ -88,8 +89,8 @@ public class GZipServletFilter implements Filter {
 
     @Override
     public void destroy() {
+        servletContext.log(this.getClass().getSimpleName() + " is destroy. ");
         filterConfig = null;
         servletContext = null;
-        servletContext.log(this.getClass().getSimpleName() + " is destroy. ");
     }
 }

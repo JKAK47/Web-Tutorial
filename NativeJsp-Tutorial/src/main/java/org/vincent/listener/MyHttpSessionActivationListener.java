@@ -19,7 +19,7 @@ import java.io.Serializable;
  * http://www.cnblogs.com/caijh/p/7687514.html
  * http://www.cnblogs.com/stono/p/4862540.html
  * https://blog.csdn.net/wl_xt/article/details/19576589
- * //实现 HttpSessionActivationListener 接口的类 一定要实现Serializable接口，否则不能被系列化
+ * //实现 HttpSessionActivationListener 接口的类 一定要实现Serializable接口，否则不能被序列化
  */
 public class MyHttpSessionActivationListener implements HttpSessionActivationListener, Serializable {
     @Override

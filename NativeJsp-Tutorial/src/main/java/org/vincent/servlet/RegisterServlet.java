@@ -1,7 +1,7 @@
 package org.vincent.servlet;
 
 import org.vincent.dao.model.UserBean;
-import org.vincent.listener.MyHttpSessionBindObject;
+import org.vincent.listener.MyHttpSessionBindingListener;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -68,12 +68,13 @@ public class RegisterServlet extends HttpServlet {
         String registerone = this.getServletConfig().getInitParameter("registerone");
         /** ServletContext 使用场景 结束 */
         String id = req.getSession().getId();
-        req.getSession().setAttribute("MyHttpSessionBindObject", new MyHttpSessionBindObject());
+        req.getSession().setAttribute("MyHttpSessionBindObject", new MyHttpSessionBindingListener());
         req.setCharacterEncoding("utf-8");
+
 /*
         HttpSession session = req.getSession();
         session.invalidate();
-        session.getAttribute("MyHttpSessionBindObject");
+        session.getAttribute("MyHttpSessionBindingListener");
 */
         resp.setContentType("text/html;charset=utf-8");
         /* 获取 post 请求提交的请求参数数据

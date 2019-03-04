@@ -19,7 +19,6 @@ public class GZipServletOutputStream extends ServletOutputStream {
     final AtomicBoolean openFlag = new AtomicBoolean(true);
 
     /**
-     *
      * @param output 输出流
      * @throws IOException
      */
@@ -41,17 +40,24 @@ public class GZipServletOutputStream extends ServletOutputStream {
         this.gzipOutputStream.flush();
     }
 
+    /*************************************************************** 覆盖OutputStream类中定义的三个write方法 ***************************/
+    /**
+     * @param b
+     * @throws IOException
+     */
     @Override
     public void write(byte b[]) throws IOException {
-        if (b != null) {
-            this.write(b, 0, b.length);
+        if (openFlag.get() && b != null) {
+            super.write(b);
+        }else {
+            throw new IOException("Stream closed!");
         }
     }
 
     @Override
     public void write(byte b[], int off, int len) throws IOException {
         if (openFlag.get()) {
-            this.gzipOutputStream.write(b, off, len);
+           super.write(b, off, len);
         } else {
             throw new IOException("Stream closed!");
         }
@@ -65,4 +71,5 @@ public class GZipServletOutputStream extends ServletOutputStream {
             throw new IOException("Stream closed!");
         }
     }
+    /*************************************************************** 覆盖OutputStream类中定义的三个write方法 ***************************/
 }

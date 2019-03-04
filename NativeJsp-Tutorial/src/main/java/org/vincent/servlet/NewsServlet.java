@@ -61,7 +61,6 @@ public class NewsServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
         doGet(req, resp);
     }
 }

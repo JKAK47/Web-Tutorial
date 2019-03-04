@@ -13,7 +13,7 @@ import java.io.PrintWriter;
  * @date 2019/1/27 - 13:22
  * @ProjectName Web-Tutorial
  * @Description: 继承 HttpServletResponseWrapper 实现对  HttpServletResponse 类型数据的包装.含有两个成员属性 GZipServletOutputStream，PrintWriter
- *                  这两个类是对内容使用GZip压缩的实例，获取他的实例引用即可压缩文本。
+ * 这两个类是对内容使用GZip压缩的实例，获取他的实例引用即可压缩文本。
  */
 public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
     /* 以字节方式输出 流*/
@@ -21,13 +21,19 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
     /* 以字符方式输出流 */
     private PrintWriter printWriter = null;
 
+    /*
+    *
+    * super 函数完成装饰器模式的职责，在父类中保存装饰对象的引用 ，被装饰对象是：HttpServletResponse
+    *
+    * */
     public GZipServletResponseWrapper(HttpServletResponse httpResponse) {
-        /* super 函数完成装饰器模式的职责，在父类中保存装饰对象的引用 ，被装饰对象是：HttpServletResponse*/
+
         super(httpResponse);
     }
 
     /**
-     *关闭两个成员属性资源 GZipServletOutputStream，PrintWriter
+     * 关闭两个成员属性资源 GZipServletOutputStream，PrintWriter
+     *
      * @throws IOException
      */
     public void close() throws IOException {
@@ -71,9 +77,11 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
     }
 
     /**
-     * 将初始化 gzipOutputStream 获取到 GZipServletOutputStream 输出流( 字节方式)并不会初始化 printWriter。修改
+     * Servlet 获取输出流
+     * 将初始化 GZipServletOutputStream 并获取到 GZipServletOutputStream 输出流实例 ( 字节方式) 并不会初始化 printWriter。修改
      * ServletReponseWrapper.getOutputStream 接口方法 让他返回 GZipServletOutputStream 实现对 response 文本进行gzip 压缩
      * getOutputStream方法和 getWriter 方法只能二选一
+     *
      * @return
      * @throws IOException 仅当servlet还没有获取PrintWriter 打印书写器时才可以获取输出流
      */
@@ -90,14 +98,17 @@ public class GZipServletResponseWrapper extends HttpServletResponseWrapper {
 
 
     /**
-     * 将初始化 gzipOutputStream 获取到 GZipServletOutputStream 输出流( 字节方式) 以及初始化 printWriter(字符流方式)
+     * Servlet 获取书写器方法
+     * 将初始化 GZipServletOutputStream 获取到 GZipServletOutputStream 输出流( 字节方式)
+     * 并根据字节流实例 获取到一个字符输出流实例PrintWriter， 初始化 printWriter(字符流方式)
+     *
      * @return
-     * @throws IOException
+     * @throws IOException 当且仅当 servlet 还没有获取输出流时候 允许 servlet 访问打印书写器。
      */
     @Override
     public PrintWriter getWriter() throws IOException {
-        if (this.printWriter == null && this.gzipOutputStream != null) {
-            throw new IllegalStateException("OutputStream obtained already - cannot get PrintWriter");
+        if (this.gzipOutputStream != null && this.printWriter == null) {
+            throw new IllegalStateException("OutputStream obtained already  - cannot get PrintWriter");
         }
         if (this.printWriter == null) {
             /*获取打印书写器 第一步：获取 servlet包装输出流

@@ -35,9 +35,10 @@ public class ForwardServlet1 extends HttpServlet {
         resp.addCookie(cookie);
 
         resp.addCookie(new Cookie("key", "vincent"));
-
+        /*
+        //forword 方法是让请求有第二个jsp 产生，所以 它不应该产生响应。
         PrintWriter writer = resp.getWriter();
-        writer.write(this.getClass().getSimpleName());
+        writer.write(this.getClass().getSimpleName());*/
         RequestDispatcher dispatcher = req.getRequestDispatcher("forwardservlet2");
         //Cannot forward after response has been committed
         // forward 方法必须在  flush， flushBuffer 方法之前 调用。
