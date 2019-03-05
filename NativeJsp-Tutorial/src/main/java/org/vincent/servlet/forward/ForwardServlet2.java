@@ -26,6 +26,12 @@ public class ForwardServlet2 extends HttpServlet {
         //FOO = (String) session.getAttribute("foo");
         writer.write(this.getClass().getSimpleName()+FOO);
         //writer.flush();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
 
     }
 
