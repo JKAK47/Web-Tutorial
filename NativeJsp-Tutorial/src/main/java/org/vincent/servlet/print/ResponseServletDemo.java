@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * @package org.vincent.servlet.print
  * @date 2019/3/5 - 8:05
  * @ProjectName Web-Tutorial
- * @Description: TODO
+ * @Description: servlet 响应流 案例
  */
 @WebServlet(
         name = "ResponseServletDemo",

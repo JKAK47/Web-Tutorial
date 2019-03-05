@@ -15,7 +15,7 @@ import java.io.OutputStream;
  * @package org.vincent.servlet.download
  * @date 2019/3/5 - 7:26
  * @ProjectName Web-Tutorial
- * @Description: TODO
+ * @Description: 以字节流形式返回一个图片资源
  */
 @WebServlet(
         name = "imgDownLoadServlet",
