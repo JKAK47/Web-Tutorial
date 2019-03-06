@@ -19,8 +19,7 @@ import java.net.URLEncoder;
  * @package org.vincent.servlet.download
  * @date 2019/3/5 - 8:24
  * @ProjectName Web-Tutorial
- * @Description: HttpServlet 实现文件下载
- *
+ * @Description: HttpServlet 实现文件下载,指示浏览器下载文件
  */
 @WebServlet(
         name = "fileDownloadServlet",
@@ -52,10 +51,16 @@ public class FileDownloadServlet extends HttpServlet {
      * @throws UnsupportedEncodingException
      */
     private void downloadFileByOutputStream(HttpServletResponse response, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
-        String realPath = this.getServletContext().getRealPath("/img/1.gif");//获取要下载的文件的绝对路径
+        String realPath = this.getServletContext().getRealPath(filePath);//获取要下载的文件的绝对路径
         String fileName = realPath.substring(realPath.lastIndexOf("\\") + 1);//获取要下载的文件名
-        response.setHeader("content-type", "image/gif");//使用content-type响应头指定发送给浏览器的数据类型为"image/jpeg"
-        //设置content-disposition响应头控制浏览器以下载的形式打开文件，中文文件名要使用URLEncoder.encode方法进行编码，否则会出现文件名乱码
+        /**
+         * 使用content-type响应头指定发送给浏览器的数据类型为"image/jpeg"
+         *
+         */
+        response.setHeader("content-type", "image/gif");
+        /**
+         * 设置content-disposition响应头控制浏览器以下载的形式打开文件，中文文件名要使用URLEncoder.encode方法进行编码，否则会出现文件名乱码
+         * */
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
         InputStream in = new FileInputStream(realPath);//获取文件输入流
         int len = 0;
