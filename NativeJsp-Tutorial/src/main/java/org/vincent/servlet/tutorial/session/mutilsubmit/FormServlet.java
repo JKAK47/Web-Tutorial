@@ -12,7 +12,7 @@ import java.io.IOException;
  * @package org.vincent.servlet.tutorial.session.mutilsubmit
  * @date 2019/3/7 - 8:00
  * @ProjectName Web-Tutorial
- * @Description: 通过session 达到去除表单多次提交目的
+ * @Description: 通过 session 达到防止表单多次提交目的，
  */
 @WebServlet(
         name = "FormServlet",
@@ -21,7 +21,8 @@ import java.io.IOException;
 public class FormServlet extends HttpServlet {
     /**
      * 用于生成Token(令牌)和跳转到form.jsp页面
-     *
+     * 为什么获取一个jsp页面还需要一个FormServlet 来实现访问？
+     * 主要是给 jsp 中隐藏域 赋值一个令牌 Token 。
      * @throws ServletException
      * @throws IOException
      */

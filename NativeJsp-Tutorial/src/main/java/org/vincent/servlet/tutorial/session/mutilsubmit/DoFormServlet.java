@@ -40,6 +40,9 @@ public class DoFormServlet extends HttpServlet {
 
     /**
      * 判断客户端提交上来的令牌和服务器端生成的令牌是否一致
+     * 判断重复提交的场景：
+     * - 提交的session 中没有token ，说明是刷新了，重复提交表单，第一次成功处理表单后session中的token删除了，第二次重复提交token 就不再有了。（点击刷新按钮 重复提交可以避免）
+     * - 后退重复提交表单 不能避免。（有这个问题？）
      * @param request
      * @return
      *         true 用户重复提交了表单

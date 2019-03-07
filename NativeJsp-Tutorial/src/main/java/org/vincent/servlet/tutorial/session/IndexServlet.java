@@ -17,7 +17,9 @@ import java.util.Set;
  * @package org.vincent.servlet.tutorial.session
  * @date 2019/3/7 - 0:41
  * @ProjectName Web-Tutorial
- * @Description: TODO
+ * @Description: IndexServlet 是演示了用于解决客户端浏览器在禁止了Cookie 之后怎么将sessionId 传给客户端的解决方案。
+ * 关联的 Servlet ： BuyServlet.java ListCartServlet.java
+ * 关联的类： DB.java, Book.java
  */
 @WebServlet(
         name = "IndexServlet",

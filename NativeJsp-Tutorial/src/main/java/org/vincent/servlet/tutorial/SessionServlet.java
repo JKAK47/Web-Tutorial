@@ -14,6 +14,11 @@ import java.io.IOException;
  * @date 2019/3/7 - 0:06
  * @ProjectName Web-Tutorial
  * @Description: Session 案例
+ * <p>
+ * 使用request对象的getSession()获取session，如果session不存在则创建一个,
+ * 如果浏览器存储 cookie 数据，意味着服务器传递给浏览器的cookie 都丢失了，再次请求并不会返回给服务器。
+ * 所以sessionId也即丢失了，所以第二次请求过来服务器不认识客户端是第二次请求了。
+ * request.getSession(); 每次都是返回一个新的session。
  */
 @WebServlet(
         name = "SessionServlet",
@@ -25,12 +30,7 @@ public class SessionServlet extends HttpServlet {
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        /**
-         * 使用request对象的getSession()获取session，如果session不存在则创建一个,
-         * 如果浏览器关闭了cookie 访问请求，意味着服务器传递给浏览器的cookie 都丢失了。
-         * 所以sessionId也即丢失了，所以第二次请求过来服务器不认识客户端是第二次请求了。
-         * request.getSession(); 每次都是返回一个新的session。
-         */
+
         HttpSession session = request.getSession();
         //将数据存储到session中
         session.setAttribute("data", "孤傲苍狼");

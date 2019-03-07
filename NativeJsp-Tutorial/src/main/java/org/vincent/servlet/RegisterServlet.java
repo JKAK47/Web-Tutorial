@@ -85,7 +85,9 @@ public class RegisterServlet extends HttpServlet {
         String account = req.getParameter("account");
         String name = req.getParameter("name");
         String gender = req.getParameter("gender");
-        /* 获取 key 对应的 一组值， 对应前端是checkbox 多选框选定的值 */
+        /* 获取 key 对应的 一组值， 对应前端是 checkbox 多选框选定的值
+        * 多选框每个 input 的 name 属性都是一样的值，
+        * */
         String[] interest = req.getParameterValues("interest");
         String msg = req.getParameter("msg");
         /* 获取query 查询参数另外一种方式，先获取到所有参数的名称，然后获取到value */
