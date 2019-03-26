@@ -41,7 +41,7 @@ public class NewsServlet extends HttpServlet{
          * */
         req.getClass();
         req.getContextPath();
-        req.getServletPath().lastIndexOf('/'); // /newsA index =0;  /newsA/aa
+        req.getServletPath().lastIndexOf('/'); // /newsA index =0;  /newsA/aa http://pengrong.com/nativejsp/
         req.getPathInfo();// null ; null
         req.setAttribute("news", news);
         System.out.println(req.getRequestURL().toString());

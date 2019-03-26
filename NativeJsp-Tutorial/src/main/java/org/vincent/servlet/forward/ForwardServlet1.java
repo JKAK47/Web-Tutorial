@@ -31,7 +31,10 @@ public class ForwardServlet1 extends HttpServlet {
          * set Cookie
          */
         Cookie cookie = new Cookie("myCookie", "myCookieValue");
+        cookie.setPath("");
+        cookie.setDomain("");
         cookie.setMaxAge(24 * 60 * 60);
+
         resp.addCookie(cookie);
 
         resp.addCookie(new Cookie("key", "vincent"));

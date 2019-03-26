@@ -2,6 +2,7 @@ package org.vincent.servlet.tutorial;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ import java.io.IOException;
 public class SessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.getClass().getClassLoader().getResource("").toString();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
@@ -39,9 +40,17 @@ public class SessionServlet extends HttpServlet {
         //判断session是不是新创建的
         if (session.isNew()) {
             response.getWriter().print("session创建成功，session的id是：" + sessionId);
+            Cookie ShareCookie =new Cookie("ShareCookie","ShareCookie-value");
+            //ShareCookie.setDomain(request);
+            ShareCookie.setMaxAge(70);
+            ShareCookie.setPath("/");
+            ShareCookie.setDomain(request.getServerName());
+            ShareCookie.setComment("vincent-comment");
+            response.addCookie(ShareCookie);
         } else {
             response.getWriter().print("服务器已经存在该session了，session的id是：" + sessionId);
         }
+
     }
 
     @Override

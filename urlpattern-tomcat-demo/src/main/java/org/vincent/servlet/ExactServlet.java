@@ -1,6 +1,7 @@
 package org.vincent.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import java.io.PrintWriter;
  * @ProjectName Web-Tutorial
  * @Description: 精确匹配 http://localhost:8888/urlpattern/vincent/exact.do Url必须是这个
  */
-public class ExactServlet extends HttpServlet{
+public class ExactServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -26,6 +27,12 @@ public class ExactServlet extends HttpServlet{
         writer.println("requestUri : " + uri);
         writer.println("ServletPath : " + req.getServletPath());
         writer.println("contextPath : " + req.getContextPath());
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                writer.println("CookieKey = " +cookie.getName() + " \t CookieValue = "+cookie.getValue());
+            }
+        }
         writer.flush();
     }
 
