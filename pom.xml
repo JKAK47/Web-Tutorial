@@ -473,6 +473,7 @@
         <module>NativeJsp-Tutorial</module>
         <module>urlpattern-tomcat-demo</module>
         <module>SpringMVC-Tutorial-Impl-01</module>
+        <module>springmvcdemo01</module>
     </modules>
 
 
