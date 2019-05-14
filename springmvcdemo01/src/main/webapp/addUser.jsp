@@ -12,7 +12,7 @@
     <title>添加用户</title>
 </head>
 <body>
-<form action="/springmvc-demo-01/addUser" method="post">
+<form action="/springmvc-demo-01/addUser" method="POST">
     编号：<input type="text" name="id"/><br/>
     姓名：<input type="text" name="name"/><br/>
     地址：<input type="text" name="address.name"/><br/>

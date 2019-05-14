@@ -14,13 +14,18 @@ import org.vincent.pojo.User;
  * @date 2019/5/13 - 23:34
  * @ProjectName Web-Tutorial
  * @Description: 从页面提交一个javaBean 数据，Controller 自动映射到 javabean
- * 还有问题
+ *
  */
 @Controller
 public class AddUserController {
 
-    @RequestMapping(path = "/addUser", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String xx(@RequestBody User user) {
+    /**
+     * addUser.jsp 提交 一个表单过来，spiingMVC 的handleAdapter 自动将表单数据和javaBean 转换
+     * @param user
+     * @return
+     */
+    @RequestMapping(path = "/addUser", method = RequestMethod.POST)
+    public String xx(  User user) {
         System.out.println(user);
         return "index";
     }

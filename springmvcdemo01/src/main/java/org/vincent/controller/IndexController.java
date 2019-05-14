@@ -48,7 +48,7 @@ public class IndexController {
 
 
     /**
-     * PathVariable 注解 将 RequestMapping 注解中模版变量绑定到接口方法参数中
+     * PathVariable 注解 将 RequestMapping 注解中模版变量绑定到接口方法参数中（支持restful风格的URL）
      * RequestParam 注解将http请求中请求参数绑定到接口方法参数中
      * RequestHeader 注解将http请求头属性绑定到接口方法中
      * CookieValue 注解 将cookie 值获取到
