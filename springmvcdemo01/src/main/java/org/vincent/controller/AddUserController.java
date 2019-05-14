@@ -20,6 +20,11 @@ import org.vincent.pojo.User;
 public class AddUserController {
 
     /**
+     *
+     * 参数绑定 ：Pojo
+     * */
+
+    /**
      * addUser.jsp 提交 一个表单过来，spiingMVC 的handleAdapter 自动将表单数据和javaBean 转换
      * @param user
      * @return

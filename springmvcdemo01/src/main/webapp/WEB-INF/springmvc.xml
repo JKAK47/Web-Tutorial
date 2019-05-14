@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 配置自动扫描Controller ，自动对Controller 注解 纳入 Spring 容器管理 ( 推荐方式 ) -->
     <context:component-scan base-package="org.vincent.controller"/>
@@ -13,5 +19,28 @@
         <!-- 后缀 -->
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <!-- 解决 @ResponseBody返回中文字符串乱码问题,暂时没有起作用(缺少 转换器：<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4"/>)
+     新增 校验文件：
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
 
+       http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+
+     -->
+    <mvc:annotation-driven >
+        <!-- 消息转换器 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                 <property name="supportedMediaTypes">
+                <list>
+                    <value>application/json;charset=UTF-8</value>
+                    <value>text/plain;charset=utf-8</value>
+                </list>
+            </property>
+            </bean>
+            <!-- 阿里fastjson -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 </beans>
