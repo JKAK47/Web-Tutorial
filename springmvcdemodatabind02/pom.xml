@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>NativeJsp-Tutorial</artifactId>
+    <artifactId>springmvc-demo-databind-02</artifactId>
     <packaging>war</packaging>
 
-    <name>基于原生Jsp 实现的web项目案例 NativeJsp</name>
+    <name>springmvc-demo-databind-02 Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -26,52 +26,45 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- SpringMVC begin
+
+            引入spring-web和 spring-webmvc 会间接引入：
+            spring-jcl
+            spring-core
+            spring-beans
+         -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
-
-        <!-- Servlet3.1 begin tomcat8.0.x
-        servlet 3.1 JSP 2.3, EL 3.0
+        <!-- SpringMVC stop -->
+        <!-- context 导入 会间接引入
+            aop 和 expression
         -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <scope>provided</scope>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.18</version>
         </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <!-- Servlet3.1 end -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <!-- runntime表示被依赖项目无需参与项目的编译，不过后期的测试和运行周期需要其参与，比如各个数据库驱动，不需要参与编译，只要执行时候注入进去即可 -->
-            <scope>runtime</scope>
-        </dependency>
-        <!-- 公共方法 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
-        <finalName>NativeJsp-Tutorial</finalName>
+        <finalName>springmvc-demo-databind-02</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
