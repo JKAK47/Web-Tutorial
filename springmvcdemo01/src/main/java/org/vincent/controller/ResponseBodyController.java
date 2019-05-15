@@ -62,7 +62,7 @@ public class ResponseBodyController {
      * produces = {"application/json; charset=utf-8"} 标定返回 结果集 content-type header 防止ResponseBody中文乱码
     * */
 
-    @RequestMapping(value = "/array",produces = {"application/json; charset=utf-8"})
+    @RequestMapping(value = "/array",produces = {"text/plain; charset=utf-8"})
     @ResponseBody
     public String packageType1(@RequestParam(value = "name", required = true, defaultValue = "1") String[] name) {
         return "names:" + Arrays.asList(name);

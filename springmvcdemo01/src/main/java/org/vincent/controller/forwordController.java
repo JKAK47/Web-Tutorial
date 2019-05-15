@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class forwordController {
     /**
+     * http://localhost:8080/springmvc-demo-01/forwardTest 回车，url 上面没有变化
      * 页面跳转方式：转发
      * 在浏览器上面不能看到 url 变化
      * springmvc 默认的方式
@@ -25,6 +26,8 @@ public class forwordController {
     /**
      * 页面跳转方式：转发
      * 在浏览器上面能看到 url 变化
+     * http://localhost:8080/springmvc-demo-01/redirectTest 变成：
+     * http://localhost:8080/springmvc-demo-01/index.jsp
      * */
     @RequestMapping("redirectTest")
     public String redirectTest(){

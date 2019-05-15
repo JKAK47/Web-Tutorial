@@ -1,4 +1,4 @@
-package org.vincent;
+package org.vincent.controller.bind;
 
 import org.vincent.pojo.User;
 
@@ -24,6 +24,9 @@ public class UserSet {
     }
 
     public UserSet(){
+        /** 这里需要定义表单有多少个 User，然后初始化多少个User，不能缺一个都不行
+         * 这不是坑嘛
+         * */
         users.add(new User());
         users.add(new User());
         users.add(new User());
