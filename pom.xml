@@ -474,6 +474,7 @@
         <module>urlpattern-tomcat-demo</module>
         <module>SpringMVC-Tutorial-Impl-01</module>
         <module>springmvcdemo01</module>
+        <module>springmvcdemodatabind02</module>
     </modules>
 
 
