@@ -10,8 +10,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 配置自动扫描Controller ，自动对Controller 注解 纳入 Spring 容器管理 ( 推荐方式 ) -->
-    <context:component-scan base-package="org.vincent.controller"/>
+    <!-- 配置自动扫描Controller ，只对Controller 注解 纳入 Spring 容器管理 ( 推荐方式 ) -->
+    <context:component-scan base-package="org.vincent.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 前缀 -->

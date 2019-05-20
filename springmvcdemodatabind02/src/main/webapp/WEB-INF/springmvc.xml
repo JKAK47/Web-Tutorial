@@ -10,8 +10,14 @@
          http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- 配置自动扫描Controller ，自动对Controller 注解 纳入 Spring 容器管理 ( 推荐方式 ) -->
-    <context:component-scan base-package="org.vincent.controller"/>
+    <!-- 配置自动扫描 Controller ，只对 Controller 注解 纳入 Spring 容器管理 ( 推荐方式 ) -->
+    <context:component-scan base-package="org.vincent.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 设置service 服务组件的 依赖注入 basePackage -->
+    <context:component-scan base-package="org.vincent.service"/>
+
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 前缀 -->
@@ -35,4 +41,14 @@
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <!-- SpringMvc 指示哪些静态资源 需要单独处理 -->
+    <!-- 确保项目根目录下 css 目录的所有样式文件 是 可见的 -->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <!-- 确保项目根目录下 page 目录的所有页面(*.html) 文件 -->
+    <mvc:resources mapping="/*.html" location="/page/"/>
+
+
+
+
 </beans>
