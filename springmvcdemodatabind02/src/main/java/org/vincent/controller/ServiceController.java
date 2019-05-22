@@ -16,7 +16,7 @@ import java.util.Map;
  * @ClassName ServiceController.java
  * @date 2019/5/21 - 0:10
  * @ProjectName Web-Tutorial
- * @Description: TODO
+ * @Description: 测试 service 是否可以用，被自动注入进来到 Controller 里面
  */
 @Controller
 public class ServiceController {
