@@ -16,7 +16,17 @@ public class Book implements Serializable {
     private String title;
     private String author;
     private Category category;
+    public Book(){
 
+    }
+    public Book(long id, String isbn, String title,
+                Category category, String author) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.category = category;
+        this.author = author;
+    }
     public Category getCategory() {
         return category;
     }
@@ -55,5 +65,16 @@ public class Book implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

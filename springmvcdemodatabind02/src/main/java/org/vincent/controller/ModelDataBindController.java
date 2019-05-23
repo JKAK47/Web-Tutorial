@@ -21,6 +21,7 @@ import java.util.Map;
  * @date 2019/5/19 - 15:42
  * @ProjectName Web-Tutorial
  * @Description: 模型数据绑定到域对象中返回给view 中
+ * 真实魔幻， 刚开始在jsp不能获取域对象，突然之间可以获取了，这是怎么了
  */
 @Controller
 @SessionAttributes(value="user",types = {User.class,String.class})/*将model 数据绑定到session 中 */
@@ -35,7 +36,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 mapBindTest");
         map.put("user", user);
-        return "WEB-INF/ModelDisplay";
+        return "ModelDisplay";
     }
 
     @RequestMapping("/modelTest")
@@ -44,7 +45,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 modelTest");
         model.addAttribute("user", user);
-        return "WEB-INF/ModelDisplay";
+        return "ModelDisplay";
     }
 
 
@@ -58,7 +59,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 modelAndViewTest1");
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("WEB-INF/ModelDisplay");
+        modelAndView.setViewName("ModelDisplay");
         return modelAndView;
     }
 
@@ -69,14 +70,14 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 modelAndViewTest2");
         modelAndView.addObject("user", user);
-        View view = new InternalResourceView("/WEB-INF/ModelDisplay.jsp");
+        View view = new InternalResourceView("ModelDisplay.jsp");
         modelAndView.setView(view);
         return modelAndView;
     }
 
     @RequestMapping("/modelAndViewTest3")
     public ModelAndView modelAndViewTest3(){
-        ModelAndView modelAndView = new ModelAndView("WEB-INF/ModelDisplay");
+        ModelAndView modelAndView = new ModelAndView("ModelDisplay");
         User user = new User();
         user.setId(1);
         user.setName("张三 modelAndViewTest3");
@@ -86,7 +87,7 @@ public class ModelDataBindController {
 
     @RequestMapping("/modelAndViewTest4")
     public ModelAndView modelAndViewTest4(){
-        View view = new InternalResourceView("/WEB-INF/ModelDisplay.jsp");
+        View view = new InternalResourceView("ModelDisplay.jsp");
         ModelAndView modelAndView = new ModelAndView(view);
         User user = new User();
         user.setId(1);
@@ -102,7 +103,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 modelAndViewTest5");
         map.put("user", user);
-        ModelAndView modelAndView = new ModelAndView("WEB-INF/ModelDisplay", map);
+        ModelAndView modelAndView = new ModelAndView("ModelDisplay", map);
         return modelAndView;
     }
 
@@ -113,7 +114,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 modelAndViewTest6");
         map.put("user", user);
-        View view = new InternalResourceView("/WEB-INF/ModelDisplay.jsp");
+        View view = new InternalResourceView("ModelDisplay.jsp");
         ModelAndView modelAndView = new ModelAndView(view, map);
         return modelAndView;
     }
@@ -123,7 +124,7 @@ public class ModelDataBindController {
         User user = new User();
         user.setId(1);
         user.setName("张三 modelAndViewTest7");
-        ModelAndView modelAndView = new ModelAndView("WEB-INF/ModelDisplay", "user", user);
+        ModelAndView modelAndView = new ModelAndView("ModelDisplay", "user", user);
         return modelAndView;
     }
 
@@ -132,7 +133,7 @@ public class ModelDataBindController {
         User user = new User();
         user.setId(1);
         user.setName("张三 modelAndViewTest8");
-        View view = new InternalResourceView("/WEB-INF/ModelDisplay.jsp");
+        View view = new InternalResourceView("ModelDisplay.jsp");
         ModelAndView modelAndView = new ModelAndView(view, "user", user);
         return modelAndView;
     }
@@ -144,7 +145,7 @@ public class ModelDataBindController {
         user.setId(1);
         user.setName("张三 requestTest");
         request.setAttribute("user", user);
-        return "WEB-INF/ModelDisplay";
+        return "ModelDisplay";
     }
     /**
      * 将一个方法返回值 绑定到 model 属性上 ，

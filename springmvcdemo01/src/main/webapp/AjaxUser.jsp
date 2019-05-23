@@ -31,7 +31,7 @@
             url:"/springmvc-demo-01/jsonType",
             data:JSON.stringify(user),
             type:"post",
-            contentType: "application/json;charse=UTF-8",
+            contentType: "application/json;charset=UTF-8",
             dataType:"text",
             success:function(data){
                 var obj = eval("(" + data + ")");
