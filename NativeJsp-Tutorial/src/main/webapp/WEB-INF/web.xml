@@ -9,6 +9,7 @@
             -->
     <!-- display-name 可有可无-->
     <display-name>NativeJSP-WebApp</display-name>
+
     <!--
         如果用户长时间没有访问服务器，超过了会话最大超时时间 ，服务器就会自动销毁超时的session
         会话超时时间可以在web.xml中进行设置，为了容易看到超时效果，我们将超时时间设置为最小值。

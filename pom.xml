@@ -476,6 +476,8 @@
         <module>springmvcdemo01</module>
         <module>springmvcdemodatabind02</module>
         <module>springmvcdemocustdatabind03</module>
+        <module>NativewebNoWebxml</module>
+        <module>SpringmvcNoWebXml</module>
     </modules>
 
 
