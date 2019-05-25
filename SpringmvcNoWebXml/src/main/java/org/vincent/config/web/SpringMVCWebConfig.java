@@ -19,8 +19,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc                                //启动SpringMVC
-@ComponentScan("org.vincent.controller")            //启动组件扫描
-public class WebConfig extends WebMvcConfigurerAdapter {
+@ComponentScan("org.vincent.controller")            //启动Controller 组件扫描
+public class SpringMVCWebConfig extends WebMvcConfigurerAdapter {
 
     //配置JSP视图解析器
     @Bean

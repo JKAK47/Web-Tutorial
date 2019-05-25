@@ -18,7 +18,7 @@ public class MyWebAppInitializer   extends AbstractAnnotationConfigDispatcherSer
      */
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { RootConfig.class };
+        return new Class<?>[] { WebRootConfig.class };
     }
 
     /**
@@ -27,7 +27,7 @@ public class MyWebAppInitializer   extends AbstractAnnotationConfigDispatcherSer
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[] { WebConfig.class };        //ָ指定Web配置类
+        return new Class<?>[] { SpringMVCWebConfig.class };        //ָ指定Web配置类
     }
 
     @Override
