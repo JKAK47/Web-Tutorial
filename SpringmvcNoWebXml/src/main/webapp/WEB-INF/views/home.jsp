@@ -12,6 +12,7 @@
 </head>
 <body>
 <br>
+<h1>springmvc no web.xml file  </h1>
       <div style='text-align:center;'>
               ${message}
           </div>

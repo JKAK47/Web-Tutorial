@@ -44,6 +44,9 @@ public class JsonDataServletDo extends HttpServlet {
         /* 组装json 数据*/
         String json = "{\"firstName\": \"Json\",a: \"Hello\", b: \"World\"}";
         out.println(json);
+        /** 获取servlet 注解注入的初始化参数 */
+        json ="{\"InitParam key1\": \""+this.getServletConfig().getInitParameter("key1")+"\",InitParam key2: \""+this.getServletConfig().getInitParameter("key2");
+        out.println(json);
         Enumeration<String> keys = req.getParameterNames();
         if (Objects.nonNull(keys)){
             while (keys.hasMoreElements()){
