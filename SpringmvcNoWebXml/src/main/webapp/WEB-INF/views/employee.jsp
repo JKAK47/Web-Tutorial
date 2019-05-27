@@ -5,8 +5,8 @@
   Time: 0:11
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html;charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -30,14 +30,14 @@
         </tr>
         <tr>
             <td><label>Last Name</label></td>
-            <td><form:input type="text" path="lastName" id="lastName" /> <form:errors
-                    path="lastName" style="color:red" /></td>
+            <td><form:input type="text" path="lastName" id="lastName" />
+                <form:errors path="lastName" style="color:red" /></td>
         </tr>
         <tr>
             <td><label>Sex</label></td>
-            <td><form:radiobutton path="sex" value="M" />Male <form:radiobutton
-                    path="sex" value="F" />Female <form:errors path="sex"
-                                                               style="color:red" /></td>
+            <td><form:radiobutton path="sex" value="M" />
+                Male <form:radiobutton path="sex" value="F" />
+                Female <form:errors path="sex" style="color:red" /></td>
         </tr>
         <tr>
             <td><label>Date of birth</label></td>
