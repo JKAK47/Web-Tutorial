@@ -1,5 +1,5 @@
 [toc]
-# 基于Servlet 3.1 + SpringMvc 实现 无 web.xml 文件，基于注解 部署javaWeb 项目
+# 基于Servlet 3.1 + SpringMvc 实现 无 web.xml 文件，基于注解驱动 部署javaWeb 项目
 ## 项目结构
 项目结构是标准的基于Maven的javaweb项目结构
 ## Pom依赖
@@ -206,7 +206,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 /**
  * @author PengRong
  * @package org.vincent.config.web
- * @ClassName MyWebAppInitializer.java
+ * @ClassName WebAppInitializer
  * @date 2019/5/25 - 12:05
  * @ProjectName Web-Tutorial
  * @Description: 基于SpringMVC 实现无 web.xml 文件 实现配置javaWeb 项目 ，对应原来的web.xml文件
@@ -305,8 +305,21 @@ public class WebRootConfig {
 </html>
 
 ```
+# Java EE 
+自从Servlet 3.0 开始 ，WEB-INF/web.xml  文件变成不是必须的配置文件，为了不用web.xml文件 需要做如下两件事
+- 写一个类实现 `ServletContainerInitializer` 接口，spring 实现该接口的是：`SpringServletContainerInitializer`  spring-web组件
+- 在`META-INF/service/javax.servlet.ServletContainerInitializer` 写上实现 上面接口类的全路径，
+有一个问题是：我在Servlet 3.1 版本+ tomcat8.0.53 上面，没有使用springmvc ，基于原生servlet 接口，没有实现上面接口，没有报错，工程可以起来。
 
+# SpringMVC 注解
+- @EnableWebMvc 启动SpringMVC,实现 WebMvcConfigurer 接口 ，所有实现了EnableWebMvc 注解的类 通过实现该接口方法定制 SpringMVC 应用配置 
+- @EnableAsync
+- @EnableScheduling
+- @EnableLoadTimeWeaving
+- @EnableTransactionManagement
 # 参考
 [如何用Java类配置Spring MVC(不通过web.xml和XML方式)](https://www.cnblogs.com/chry/p/6239510.html)
 
 [Spring MVC Annotation Example](http://javabycode.com/spring-framework-tutorial/spring-mvc-tutorial/spring-mvc-annotation-example.html)
+
+[Spring @MVC configuration without XML](http://www.rockhoppertech.com/blog/spring-mvc-configuration-without-xml/)

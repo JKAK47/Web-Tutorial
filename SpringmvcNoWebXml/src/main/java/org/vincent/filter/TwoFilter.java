@@ -14,7 +14,7 @@ import java.io.IOException;
  * @ClassName TwoFilter.java
  * @date 2019/5/26 - 19:06
  * @ProjectName Web-Tutorial
- * @Description: 通过 org.vincent.config.web.MyWebAppInitializer#getServletFilters() 注册过滤器
+ * @Description: 通过 org.vincent.config.web.WebAppInitializer#getServletFilters() 注册过滤器
  */
 public class TwoFilter implements Filter {
     @Override

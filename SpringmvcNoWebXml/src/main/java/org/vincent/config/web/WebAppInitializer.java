@@ -1,7 +1,7 @@
 package org.vincent.config.web;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import org.vincent.filter.OneFilter;
 import org.vincent.filter.TwoFilter;
 
 import javax.servlet.Filter;
@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * @author PengRong
  * @package org.vincent.config.web
- * @ClassName MyWebAppInitializer.java
+ * @ClassName WebAppInitializer.java
  * @date 2019/5/25 - 12:05
  * @ProjectName Web-Tutorial
- * @Description: 基于SpringMVC 实现无 web.xml 文件 实现配置javaWeb 项目 ，对应原来的web.xml文件
+ * @Description: 基于SpringMVC 实现无 web.xml 文件 实现配置javaWeb 项目 ， 是Spring 下 javaWeb 项目启动配置 ，可以配置 Root Application， ServletFilter， ServletMapping
  *
  */
-public class MyWebAppInitializer   extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 
 
@@ -62,12 +62,16 @@ public class MyWebAppInitializer   extends AbstractAnnotationConfigDispatcherSer
     }
 
     /**
-     * 增加 过滤器映射到 DispatcherServlet
+     * 增加 过滤器映射到 DispatcherServlet，
+     * 这种方式对于jar 包实现的 filter 有很好的兼容性，可以通过手动注册上去。
      * */
     @Override
     protected Filter[] getServletFilters() {
         List<Filter> filters =new ArrayList<>();
         filters.add(new TwoFilter());
+        /** 设置字符集 编码 UTF-8 */
+        CharacterEncodingFilter filter = new CharacterEncodingFilter("UTF-8",true);
+        filters.add(filter);
         return filters.toArray(new Filter[0]);
     }
 }
