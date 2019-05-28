@@ -69,6 +69,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+        <!-- JSR 303 验证器 begin -->
 
         <!-- JSR 303 验证器 接口 API -->
         <dependency>
@@ -80,7 +81,7 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-
+        <!-- JSR 303 验证器 stop -->
     </dependencies>
 
     <build>
