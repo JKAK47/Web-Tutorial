@@ -29,12 +29,12 @@ public class Employee implements Serializable{
     @NotEmpty
     private String sex;
 
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    @Past
-    @NotNull
+    @DateTimeFormat(pattern="yyyy-MM-dd") /** 设置传进来的时间字符串 格式 */
+    @Past(message = "时间必须是以前的一个日期 ")
+    @NotNull(message = "不能为空")
     private Date birthDay;
 
-    @Email
+    @Email(message = "不是一个合法的电子邮件 pr ")
     @NotEmpty
     private String email;
 

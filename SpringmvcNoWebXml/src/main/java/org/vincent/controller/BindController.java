@@ -1,17 +1,17 @@
 package org.vincent.controller;
 
-import com.sun.org.apache.regexp.internal.REUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.vincent.bind.demo.model.Employee;
-import org.vincent.bind.demo.model.HelloDto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,24 +27,34 @@ import java.util.List;
 @RequestMapping(path = "/bind")
 public class BindController {
 
-    @RequestMapping(path = "/new",method = RequestMethod.GET)
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String newProfile(ModelMap model) {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "employee";
     }
-    @RequestMapping(method = RequestMethod.POST,path = "submit")
-    public String saveProfile(@Valid Employee employee,
-                              BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()) {
+    /**
+     *  不需要 BindingResult result, 收集错误信息，前端不需要关系这个错误，只需要报错即可
+     * @param employee
+     * @param model
+     * @return
+     *
+     * 加上 @Valid 注解
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "submit")
+    public String saveProfile(@Valid Employee employee,
+                              ModelMap model) {
+
+       /* if (result.hasErrors()) {
             return "employee";
-        }
+        }*/
 
         model.addAttribute("success", "Dear " + employee.getFirstName()
                 + " , your profile completed successfully");
         return "success";
     }
+
     /*
      * 用于给 Model 设置域对象
      * Method used to populate the country list in view.
@@ -63,8 +73,9 @@ public class BindController {
     }
 
     @RequestMapping(path = "vaild")
-    public String valid(@RequestBody @Valid HelloDto helloDto){
-
-        return  "ok";
+    @ResponseBody
+    public String valid(@RequestParam @Valid @Min(10) @Max(20) int helloDto) {
+        System.out.println(helloDto);
+        return "ok";
     }
 }
