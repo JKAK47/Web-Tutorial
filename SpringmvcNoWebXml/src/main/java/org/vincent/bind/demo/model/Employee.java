@@ -20,10 +20,10 @@ import java.util.Date;
  */
 public class Employee implements Serializable{
 
-    @Size(min=3, max=25)
+    @Size(min=3, max=25,message = "字符串长度超过了区间【3,25】")
     private String firstName;
 
-    @Size(min=3, max=25)
+    @Size(min=4, max=25,message = "字符串长度超过了区间[ 4,25]")
     private String lastName;
 
     @NotEmpty

@@ -230,7 +230,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
                 <!--provided意味着打包的时候可以不用包进去, JDK或者运行时候容器提供了该包  -->
                 <scope>provided</scope>
             </dependency>

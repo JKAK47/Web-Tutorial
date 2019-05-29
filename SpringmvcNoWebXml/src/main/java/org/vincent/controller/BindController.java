@@ -1,12 +1,15 @@
 package org.vincent.controller;
 
+import com.sun.org.apache.regexp.internal.REUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.vincent.bind.demo.model.Employee;
+import org.vincent.bind.demo.model.HelloDto;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -57,5 +60,11 @@ public class BindController {
         countries.add("Australia");
         countries.add("Other");
         return countries;
+    }
+
+    @RequestMapping(path = "vaild")
+    public String valid(@RequestBody @Valid HelloDto helloDto){
+
+        return  "ok";
     }
 }

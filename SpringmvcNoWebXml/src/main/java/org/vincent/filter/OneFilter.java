@@ -22,10 +22,10 @@ import java.io.PrintWriter;
  * @ProjectName Web-Tutorial
  * @Description: 基于注解 的filter 案例实现 ,可以手动  通过 WebFilter 注解添加到应用总，也可以在  org.springframework.web.servlet.support.AbstractDispatcherServletInitializer#getServletFilters() 方法中 手动创建添加进去
  */
-@WebFilter( description = "web filter impl",displayName = " filter display",filterName=" filter display 2",
-        initParams = {@WebInitParam(name = "filter1",value = "12"),@WebInitParam(name = "filter2",value = "ssdf")},
+@WebFilter(description = "web filter impl", displayName = " filter display", filterName = " filter display 2",
+        initParams = {@WebInitParam(name = "filter1", value = "12"), @WebInitParam(name = "filter2", value = "ssdf")},
         asyncSupported = true, //异步支持
-        urlPatterns ={"/*","/"},//匹配规则
+        urlPatterns = {"/*", "/"},//匹配规则
         dispatcherTypes = {DispatcherType.REQUEST}
 )
 public class OneFilter implements Filter {
@@ -45,7 +45,7 @@ public class OneFilter implements Filter {
         this.filterConfig = filterConfig;
         servletContext = filterConfig.getServletContext();
         servletContext.log("SimpleClassName: " + this.getClass().getSimpleName() + "\t" + "oneFilter init");
-        servletContext.log("filter1 = "+ filterConfig.getInitParameter("filter1")+", filter2 = "+ filterConfig.getInitParameter("filter2"));
+        servletContext.log("filter1 = " + filterConfig.getInitParameter("filter1") + ", filter2 = " + filterConfig.getInitParameter("filter2"));
     }
 
     /**
@@ -78,17 +78,18 @@ public class OneFilter implements Filter {
             /** 触发filter 链上的下一个filter 被调用  */
             chain.doFilter(request, response);
 
+        } else {
+            /* 不通过 chain.doFilter 转发 ，拦截请求 */
+            PrintWriter printWriter = response.getWriter();
+            //获取当前的字符编码
+            String CurCharacterEncoding = response.getCharacterEncoding();
+            //指定返回的字符串字符编码
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/plain;charset=UTF-8");
+            printWriter.write("你被拦截了,myParam = " + myParam);
+            printWriter.flush();
+            response.flushBuffer();
         }
-        /* 不通过 chain.doFilter 转发 ，拦截请求*/
-        PrintWriter printWriter = response.getWriter();
-        //获取当前的字符编码
-        String CurCharacterEncoding = response.getCharacterEncoding();
-        //指定返回的字符串字符编码
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/plain;charset=UTF-8");
-        printWriter.write("你错了");
-        printWriter.flush();
-        response.flushBuffer();
 
     }
 
