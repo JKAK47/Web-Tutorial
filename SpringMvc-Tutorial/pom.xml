@@ -12,7 +12,7 @@
     <artifactId>SpringMvc-Tutorial</artifactId>
     <packaging>war</packaging>
 
-    <name>基于SpringMvc 实现的web项目</name>
+    <name>基于SpringMvc 实现的web项目 mybatis</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <developers>

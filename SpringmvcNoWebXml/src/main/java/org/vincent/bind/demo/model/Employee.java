@@ -18,6 +18,7 @@ import java.util.Date;
  * @ProjectName Web-Tutorial
  * @Description: 表单数据校验 Bean
  */
+
 public class Employee implements Serializable{
 
     @Size(min=3, max=25,message = "字符串长度超过了区间【3,25】")

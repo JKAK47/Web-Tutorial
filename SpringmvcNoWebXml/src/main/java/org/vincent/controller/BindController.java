@@ -1,8 +1,11 @@
 package org.vincent.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +28,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(path = "/bind")
+@Validated
 public class BindController {
 
     @RequestMapping(path = "/new", method = RequestMethod.GET)
@@ -35,12 +39,11 @@ public class BindController {
     }
 
     /**
-     *  不需要 BindingResult result, 收集错误信息，前端不需要关系这个错误，只需要报错即可
-     * @param employee
-     * @param model
-     * @return
+     * 不需要 BindingResult result, 收集错误信息，前端不需要关系这个错误，只需要报错即可
      *
-     * 加上 @Valid 注解
+     * @param employee 接受表单数据  ，不是以Json 上传的数据，然后 通过@Valid 注解 判定是否满足情况
+     * @param model
+     * @return 加上 @Valid 注解
      */
     @RequestMapping(method = RequestMethod.POST, path = "submit")
     public String saveProfile(@Valid Employee employee,
@@ -52,6 +55,21 @@ public class BindController {
 
         model.addAttribute("success", "Dear " + employee.getFirstName()
                 + " , your profile completed successfully");
+        return "success";
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            path = "/submitjson",
+            //consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 返回值类型 */
+    )
+    public String saveProfile1(@RequestParam String name,@RequestBody @Valid Employee employee) {
+        /*@RequestBody Employee employee*/
+       /* if (result.hasErrors()) {
+            return "employee";
+        }*/
+
+        System.out.println(name+ employee);
         return "success";
     }
 
