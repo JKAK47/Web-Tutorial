@@ -1,6 +1,7 @@
 package org.vincent.filter.gzip;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -70,6 +71,16 @@ public class GZipServletOutputStream extends ServletOutputStream {
         } else {
             throw new IOException("Stream closed!");
         }
+    }
+
+    @Override
+    public boolean isReady() {
+        return false;
+    }
+
+    @Override
+    public void setWriteListener(WriteListener writeListener) {
+
     }
     /*************************************************************** 覆盖OutputStream类中定义的三个write方法 ***************************/
 }

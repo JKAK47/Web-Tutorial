@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.vincent.pojo.User;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * @author PengRong
@@ -28,7 +33,7 @@ public class IndexController {
      * /index/v1 url 通过GET访问
      * @return
      */
-    @RequestMapping(path = "/v1",method = RequestMethod.GET)
+    @RequestMapping(path = "/v1",method = GET)
     public String index(){
         System.out.println("v1 index");
         return "index2";// 返回view 视图名称和相对 requestMapping 请求路径的 相对视图路径。
@@ -42,8 +47,9 @@ public class IndexController {
      * @param age
      * @return
      */
-    @RequestMapping(path = "/v2",method = RequestMethod.GET)
-    public String v2(@RequestParam(name = "param" ,required = true) String param,@RequestParam(name = "age") int age){
+    @RequestMapping(path = "/v2",method = GET)
+    public String v2(@RequestParam(name = "param" ,required = true) String param, @RequestParam(name = "age") int age, HttpServletRequest request){
+        request.getParameter("");
         System.out.println(param);
         System.out.println(age);
         return "index3";
@@ -59,7 +65,7 @@ public class IndexController {
      * @param param
      * @return
      */
-    @RequestMapping(path = "/v2/{param}",method = RequestMethod.GET)
+    @RequestMapping(path = "/v2/{param}",method = GET)
     public String v20(@PathVariable(name = "param" ,required = true) String param, @RequestParam(name = "age") int age,
                       @RequestHeader(name="Accept") String keepAlive,
                       @RequestHeader(name = "Cookie") String Cookie,
@@ -70,6 +76,32 @@ public class IndexController {
         System.out.println(age);
         System.out.println(keepAlive);
         return "index3";
+    }
+
+    /**
+     * 引入两个 PathVariable
+     * @param fooid
+     * @param barid
+     * @return
+     */
+    @RequestMapping(value = "/ex/foos/{fooid}/bar/{barid}", method = GET)
+    @ResponseBody
+    public String getFoosBySimplePathWithPathVariables
+            (@PathVariable long fooid, @PathVariable long barid) {
+        return "Get a specific Bar with id=" + barid +
+                " from a Foo with id=" + fooid;
+    }
+
+    /**
+     * PathVariable 仅接受 数字，使用正则表达式描述
+     * @param numericId
+     * @return
+     */
+    @RequestMapping(value = "/ex/bars/{numericId:[\\d]+}", method = GET)
+    @ResponseBody
+    public String getBarsBySimplePathWithPathVariable(
+            @PathVariable long numericId) {
+        return "Get a specific Bar with id=" + numericId;
     }
 
 

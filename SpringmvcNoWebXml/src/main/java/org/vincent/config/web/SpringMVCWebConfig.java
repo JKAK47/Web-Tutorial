@@ -50,7 +50,7 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
      * 解决springmvc 请求接受 json字符串 不支持问题
      * Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/json;charset=UTF-8' not supported]
      * <p>
-     * 从Http 协议字符串转成 JavaBean 使用的转换器；注解@ResponseBody的时候去配置它;
+     * 从Http 协议字符串转成 JavaBean 使用的转换器；注解@ResponseBody的时候去配置 HttpMessageConverter ,同个这个bean 将根据Content-Type 属性 解析成对应的JavaBean;
      * json转化器，它可以将结果转化从JavaBean 转为JSON 字符串 ,用于处理响应结果返回json字符串时候使用
      */
     @Bean(name = "httpMessageConverter")
@@ -79,7 +79,6 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
                 httpMessageConverter
         ));
         return requestMappingHandlerAdapter;
-
     }
 
 

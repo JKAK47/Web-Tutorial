@@ -17,6 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author PengRong
@@ -58,11 +59,22 @@ public class BindController {
         return "success";
     }
 
+    /**
+     *
+     //导入jackson的jar包，在controller的方法中可以使用@RequestBody，让springmvc将json格式字符串自动转换成java的pojo
+     //页面json的可以要和 pojo的属性名称 一致
+     //controller方法返回pojo类型的对象，并且用@ResponseBody注解，springmvc会自动将pojo对象转换成json格式字符串
+
+     * @param name
+     * @param employee
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,
             path = "/submitjson",
-            //consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
-            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 返回值类型 */
+            consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型 */
     )
+    @ResponseBody
     public String saveProfile1(@RequestParam String name,@RequestBody @Valid Employee employee) {
         /*@RequestBody Employee employee*/
        /* if (result.hasErrors()) {
@@ -71,6 +83,37 @@ public class BindController {
 
         System.out.println(name+ employee);
         return "success";
+    }
+
+
+    /**
+     * 前端发来的Json 对象用Map 接受
+     * @param name
+     * @param map
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST,
+            path = "/submitjsonmap",
+            consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型 */
+    )
+    @ResponseBody
+    public String saveProfile1(@RequestParam String name, @RequestBody Map<String,String> map) {
+        /*@RequestBody Employee employee*/
+       /* if (result.hasErrors()) {
+            return "employee";
+        }*/
+
+        System.out.println(name+ map);
+        return "success";
+    }
+    @RequestMapping(method = RequestMethod.POST,
+    produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
+    path = "/requst")
+    @ResponseBody
+    public String pp(@RequestParam String name){
+        System.out.println(name);
+        return  name;
     }
 
     /*
