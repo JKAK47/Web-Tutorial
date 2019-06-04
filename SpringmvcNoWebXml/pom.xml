@@ -72,10 +72,7 @@
         <!-- JSR 303 验证器 begin -->
 
         <!-- JSR 303 验证器 接口 API -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
+       ///*-
         <!-- JSR 303 验证器 接口 API 实现  -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>

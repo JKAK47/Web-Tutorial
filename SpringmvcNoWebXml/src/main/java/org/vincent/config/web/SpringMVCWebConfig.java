@@ -3,17 +3,21 @@ package org.vincent.config.web;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
@@ -28,7 +32,9 @@ import java.util.Arrays;
  */
 @Configuration
 @EnableWebMvc                                //启动SpringMVC
-@ComponentScan("org.vincent.controller")            //启动Controller 组件扫描， 只扫描 controller
+@ComponentScan(basePackages = "org.vincent.controller",/*Controller 扫描的base路径*/  //启动Controller 组件扫描， 只扫描 controller
+        includeFilters ={@ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Controller.class})},
+useDefaultFilters = false)           /** 指定扫描的类型*/
 public class SpringMVCWebConfig implements WebMvcConfigurer {
 
     /**
@@ -47,6 +53,8 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
 
 
     /**
+     * 控制器中使用@ ResponseBody 或@ RequestBody,spring MVC就会自动帮我们 做“java对象<--->对应格式数据”的转换，用到的就是message converter。
+     *
      * 解决springmvc 请求接受 json字符串 不支持问题
      * Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'application/json;charset=UTF-8' not supported]
      * <p>
@@ -57,12 +65,12 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
     public HttpMessageConverter httpMessageConverter() {
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
-                new MediaType[]{MediaType.valueOf(MediaType.APPLICATION_JSON_UTF8_VALUE),
-                        MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE),
-                        MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8")
-                }
-        ));
+                MediaType.valueOf(MediaType.APPLICATION_JSON_UTF8_VALUE),
+                MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE),
+                MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8")
 
+        ));
+        mappingJackson2HttpMessageConverter.setDefaultCharset(Charset.forName("UTF-8"));
         return mappingJackson2HttpMessageConverter;
     }
 
@@ -85,21 +93,20 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
     //配置静态资源的处理
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();        //对静态资源的请求转发到容器缺省的servlet，而不使用DispatcherServlet
+        configurer.enable();        //开启转发到默认Servlet， 对静态资源的请求转发到容器缺省的servlet，而不使用DispatcherServlet
+        //configurer.enable("defaultServletName"); // 指定默认Servlet 名字
     }
 
     /**
-     * 对静态资源  images, js, and, css 指定在哪里找
-     * 可以指定多个
+     * 对静态资源  images, js, and, css 指定在哪里找资源
+     * 可以指定多个，
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**", "/js/**", "/css/**")
-                .addResourceLocations("/static/", "/js/", "/css/")/** 在 webapp/static/目录下寻找 */
-
-        ;
-
+        ResourceHandlerRegistration resourceHandlerRegistration = registry.addResourceHandler("/static/**", "/js/**", "/css/**");
+        resourceHandlerRegistration.addResourceLocations("/static/", "/js/", "/css/");/** 在 webapp/static/目录下寻找 */
     }
 
 }
