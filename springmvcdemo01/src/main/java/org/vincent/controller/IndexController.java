@@ -67,14 +67,14 @@ public class IndexController {
      */
     @RequestMapping(path = "/v2/{param}",method = GET)
     public String v20(@PathVariable(name = "param" ,required = true) String param, @RequestParam(name = "age") int age,
-                      @RequestHeader(name="Accept") String keepAlive,
+                      @RequestHeader(name="Accept") String[] accepts,
                       @RequestHeader(name = "Cookie") String Cookie,
                       @CookieValue (name = "JSESSIONID") String sessionId){
         System.out.println(sessionId);
         System.out.println(Cookie);
         System.out.println(param);
         System.out.println(age);
-        System.out.println(keepAlive);
+        System.out.println(accepts);
         return "index3";
     }
 

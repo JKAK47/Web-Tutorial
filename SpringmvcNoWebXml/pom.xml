@@ -23,6 +23,7 @@
     </properties>
 
     <dependencies>
+
         <!-- Servlet3.1 begin tomcat8.0.x
         servlet 3.1 JSP 2.3, EL 3.0
         -->
@@ -72,14 +73,13 @@
         <!-- JSR 303 验证器 begin -->
 
         <!-- JSR 303 验证器 接口 API -->
-       ///*-
         <!-- JSR 303 验证器 接口 API 实现  -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
         <!-- JSR 303 验证器 stop -->
-        <!--JSON lib -->
+        <!--JSON lib begin  -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -93,8 +93,39 @@
             <version>2.9.8</version>
         </dependency>
 
+        <!--<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.18</version>
+        </dependency>-->
         <!--JSON lib -->
+
+        <!-- log slf4j -->
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <!-- log slf4j stop -->
+
     </dependencies>
+
 
     <build>
         <finalName>SpringmvcNoWebXml</finalName>

@@ -21,7 +21,7 @@
 
 <h1>Profile Employee</h1>
 
-<form:form method="POST" modelAttribute="employee" action="./submit">
+<form:form method="POST" modelAttribute="employee" action="./submit" acceptCharset="UTF-8" >
     <table>
         <tr>
             <td><label>First Name</label></td>

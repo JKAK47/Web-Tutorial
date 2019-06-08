@@ -317,6 +317,9 @@ public class WebRootConfig {
 - @EnableScheduling
 - @EnableLoadTimeWeaving
 - @EnableTransactionManagement
+
+# 增加 slf4就注解 用于创建log
+
 # 参考
 [如何用Java类配置Spring MVC(不通过web.xml和XML方式)](https://www.cnblogs.com/chry/p/6239510.html)
 

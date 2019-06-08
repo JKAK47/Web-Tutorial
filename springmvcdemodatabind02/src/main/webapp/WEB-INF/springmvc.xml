@@ -27,9 +27,9 @@
     </bean>
 
     <!-- 解决 responseBody 注解 中文乱码 问题 -->
-    <mvc:annotation-driven  >
-        <!-- 消息转换器 -->
-        <mvc:message-converters register-defaults="true">
+    <mvc:annotation-driven   >
+        <!-- Http请求消息转换成Java对象  register-defaults="false" 配置不使用默认的 消息转换器  -->
+        <mvc:message-converters register-defaults="false">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
