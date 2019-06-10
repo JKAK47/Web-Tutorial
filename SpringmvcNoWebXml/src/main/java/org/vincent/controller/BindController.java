@@ -18,7 +18,6 @@ import org.vincent.bind.demo.model.Employee;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +46,7 @@ public class BindController {
     }
 
     /**
+     * 提交表单数据</p>
      * 不需要 BindingResult result, 收集错误信息，前端不需要关系这个错误，只需要报错即可
      *
      * @param employee 接受表单数据  ，不是以Json 上传的数据，然后 通过@Valid 注解 判定是否满足情况
@@ -54,13 +54,11 @@ public class BindController {
      * @return 加上 @Valid 注解
      */
     @RequestMapping(method = RequestMethod.POST, path = "submit")
-    public String saveProfile(@Valid Employee employee,
+    public String submitForm(@Valid Employee employee,
                               ModelMap model) {
-
        /* if (result.hasErrors()) {
             return "employee";
         }*/
-
         model.addAttribute("success", "Dear " + employee.getFirstName()
                 + " , your profile completed successfully");
         return "success";
@@ -78,7 +76,7 @@ public class BindController {
     @RequestMapping(method = RequestMethod.POST,
             path = "/submitjson",
             consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
-            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型；同时 */
     )
     @ResponseBody
     public String saveProfile1(@RequestParam String name, @RequestBody @Valid Employee employee) {
@@ -135,7 +133,6 @@ public class BindController {
         dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
-
 
     /*
      * 用于给 Model 设置域对象， 返回值自动增加到ModelMap 中

@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.support.ConversionServiceFactoryBean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -134,9 +136,9 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
      * 加一个日期格式转换器,全局加转换器没有用 不生效
      * */
 
-   /* @Bean
+    /*@Bean
     public CustomDateConverter dateFormatBean(){
-       *//* ConversionServiceFactoryBean formattingConversionServiceFactoryBean =new   ConversionServiceFactoryBean();
+        *//*ConversionServiceFactoryBean formattingConversionServiceFactoryBean =new   ConversionServiceFactoryBean();
         HashSet<CustomDateConverter> hashSet =new HashSet<>();
         CustomDateConverter customDateConverter =new CustomDateConverter();
         customDateConverter.setDateParttern("yyyy-MM-dd");

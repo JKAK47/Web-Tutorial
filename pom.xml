@@ -497,6 +497,7 @@
         <module>springmvcdemocustdatabind03</module>
         <module>NativewebNoWebxml</module>
         <module>SpringmvcNoWebXml</module>
+        <module>springmvcCustDateBindNoXML</module>
     </modules>
 
 
