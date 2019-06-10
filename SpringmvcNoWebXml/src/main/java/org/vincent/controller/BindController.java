@@ -55,13 +55,13 @@ public class BindController {
      */
     @RequestMapping(method = RequestMethod.POST, path = "submit")
     public String submitForm(@Valid Employee employee,
-                              ModelMap model) {
+                             ModelMap model) {
        /* if (result.hasErrors()) {
             return "employee";
         }*/
         model.addAttribute("success", "Dear " + employee.getFirstName()
                 + " , your profile completed successfully");
-        return "success";
+        return "success"; /** 返回 view 名字 */
     }
 
     /**
