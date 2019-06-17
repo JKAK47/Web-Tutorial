@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,9 +48,9 @@ public class BindController {
 
     /**
      * 提交表单数据</p>
-     * 不需要 BindingResult result, 收集错误信息，前端不需要关系这个错误，只需要报错即可
+     * 不需要 BindingResult result, 收集错误信息，前端不需要关心这个错误，只需要报错即可
      *
-     * @param employee 接受表单数据  ，不是以Json 上传的数据，然后 通过@Valid 注解 判定是否满足情况
+     * @param employee 接受表单数据  ，不是以Json 上传的数据，然后 通过 @Valid 注解 判定是否满足情况
      * @param model
      * @return 加上 @Valid 注解
      */
@@ -76,7 +77,7 @@ public class BindController {
     @RequestMapping(method = RequestMethod.POST,
             path = "/submitjson",
             consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
-            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型；同时 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型；以JSON 返回  */
     )
     @ResponseBody
     public String saveProfile1(@RequestParam String name, @RequestBody @Valid Employee employee) {
@@ -86,6 +87,23 @@ public class BindController {
         }*/
 
         System.out.println(name + employee);
+        return "success";
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST,
+            path = "/submitjsonList",
+            consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/** 指示 请求响应返回值类型；以JSON 返回  */
+    )
+    @ResponseBody
+    public String saveProfile2(@RequestParam String name, @RequestBody @Valid List<Employee> employees) {
+        /*@RequestBody Employee employee*/
+       /* if (result.hasErrors()) {
+            return "employee";
+        }*/
+
+        System.out.println(name + employees.toString());
         return "success";
     }
 
@@ -113,6 +131,31 @@ public class BindController {
         return "success";
     }
 
+    /**
+     * 获取JSON 数据
+     *
+     * @return
+     */
+    @GetMapping(
+            path = "/getjson",
+            //consumes = {"application/json;charset=UTF-8"},/** 客户端提交的数据类型 */
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}/**包含两层含义 指示 请求响应返回值类型，同时指明 request 请求中Accept头中必须包含MediaType.APPLICATION_JSON_UTF8_VALUE */
+    )
+    @ResponseBody
+    public List<String> getStr() {
+        List<String> list = new ArrayList<>();
+        list.add("asasasdfsdf");
+        list.add("asasd水电费fsdf");
+        list.add("asas阿萨德sdf");
+        list.add("asafsdf");
+        list.add("aaaa");
+        return list;
+    }
+
+    /**
+     * @param name
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE},
             path = "/requst")
@@ -127,12 +170,12 @@ public class BindController {
      *
      * @param binder
      */
-    @InitBinder
+   /* @InitBinder
     public void InitBinder(WebDataBinder binder) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+    }*/
 
     /*
      * 用于给 Model 设置域对象， 返回值自动增加到ModelMap 中

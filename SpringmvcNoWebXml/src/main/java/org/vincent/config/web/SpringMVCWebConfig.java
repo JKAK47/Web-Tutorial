@@ -1,12 +1,12 @@
 package org.vincent.config.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.context.support.ConversionServiceFactoryBean;
-import org.springframework.format.FormatterRegistry;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -15,15 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author PengRong
@@ -45,9 +52,10 @@ import java.util.Arrays;
 public class SpringMVCWebConfig implements WebMvcConfigurer {
 
     /**
-     * 第一步： 创建映射处理器
+     * 第一步： 创建基于注解映射处理器，根据请求查找 映射的Controller 类
      * 创建一个基于注解的 映射处理器  RequestMappingHandlerMapping, 基于注解的Controller，
      * 对请求url 和请求 Handler ( 就是 Controller，RestController ) 实例之间建立映射关系
+     *
      * @return
      */
     @Bean
@@ -80,9 +88,9 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
     }
 
     /**
-     * * 第二步： 创建处理器适配器
+     * * 第二步： 创建基于注解处理器适配器
      * 配置基于注解的 处理器适配器, 完成对@RequestMapping 注解方法的调用
-     * 注入上面定义的 messageConverter Bean
+     * 注入上面定义的 messageConverter Bean； 实现 JavaBean 和 Json 结构体的转换
      *
      * @param httpMessageConverter
      * @return
@@ -90,9 +98,32 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
     @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter(HttpMessageConverter httpMessageConverter) {
         RequestMappingHandlerAdapter requestMappingHandlerAdapter = new RequestMappingHandlerAdapter();
-        requestMappingHandlerAdapter.setMessageConverters(Arrays.asList(
-                httpMessageConverter
-        ));
+        List<HttpMessageConverter<?>> messageConverters = requestMappingHandlerAdapter.getMessageConverters();
+        messageConverters.add(httpMessageConverter);
+        /** 通过反射给指定属性赋值；设置字符串 字符串字符集 defaultCharset = UTF-8 */
+        messageConverters.parallelStream().forEach(e -> {
+            Class<?> aClass = e.getClass();
+            for (; aClass != Object.class; aClass = aClass.getSuperclass()) {
+                //Field defaultCharset = e.getClass().getDeclaredField("defaultCharset");// 该方法只是获取本类的属性值,父类属性获取不到； getDeclaredFields 方法也是只能获取本类属性
+                Field[] fields = aClass.getDeclaredFields();
+                for (Field field : fields) {
+                    int mod = field.getModifiers();
+                    if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                        continue;/** 对应不可修改的字段就不用在修改了 */
+                    }
+                    String fieldName = field.getName();
+                    if (Objects.nonNull(fieldName) && fieldName.equals("defaultCharset")) {
+                        try {
+                            field.setAccessible(true);
+                            field.set(e, Charset.forName("UTF-8"));/** 设置元素 e 属性 */
+                        } catch (IllegalAccessException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+        requestMappingHandlerAdapter.setMessageConverters(messageConverters);
         return requestMappingHandlerAdapter;
     }
 
@@ -155,4 +186,38 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
         //registry.addConverter(dateFormatBean());
         registry.addFormatter(dateFormatBean());
     }*/
+
+
+    /**
+     * SpringMVC 国际化相关配置 开始
+     */
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasenames("language/message");
+        return source;
+    }
+
+    /**
+     * 国际化操作如果基于 Session/Cookie 设置 则必须设置
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LocaleChangeInterceptor());
+    }
+
+    /**
+     * 默认的语言区域解析器设置 可以忽略
+     *
+     * @return
+     */
+    @Bean
+    public AcceptHeaderLocaleResolver acceptHeaderLocaleResolver() {
+        return new AcceptHeaderLocaleResolver();
+    }
+    /**
+     * SpringMVC 国际化相关配置 结束
+     */
 }

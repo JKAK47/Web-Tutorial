@@ -28,7 +28,7 @@ import org.vincent.converter.TradeIdToTradeConverter;
 @ComponentScan(basePackages = "org.vincent.controller",/*Controller 扫描的base路径*/  //启动Controller 组件扫描， 只扫描 controller
         includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class, RestController.class})},
         useDefaultFilters = false)
-@Import(value = {MyViewConfig.class})
+@Import(value = {MyViewConfig.class}) /**导入其他配置 类似于原来xml 文件中import 元素 */
 public class SpringMVCWebConfig implements WebMvcConfigurer {
     @Bean
     public TradeService tradeService(){

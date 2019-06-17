@@ -498,6 +498,7 @@
         <module>NativewebNoWebxml</module>
         <module>SpringmvcNoWebXml</module>
         <module>springmvcCustDateBindNoXML</module>
+        <module>springmvcgetxml</module>
     </modules>
 
 

@@ -1,5 +1,6 @@
 package org.vincent.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,7 +24,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @date 2019/5/13 - 22:07
  * @ProjectName Web-Tutorial
  * @Description: 最简单的基于 Controller 注解，处理逻辑，输出一个View
- * 不能使用 RestController 注解，不知道为什么
+ * 不要使用 RestController 注解， 不然返回的对象会当作 Http返回，
+ * Controller 注解，返回String值 当作视图名称
  */
 
 @Controller
@@ -31,12 +33,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class IndexController {
     /**
      * /index/v1 url 通过GET访问
+     * produces 表示返回的数据类型。
      * @return
      */
-    @RequestMapping(path = "/v1",method = GET)
+    @RequestMapping(path = "/v1",method = GET,produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
     public String index(){
         System.out.println("v1 index");
-        return "index2";// 返回view 视图名称和相对 requestMapping 请求路径的 相对视图路径。
+        return "{\"num\":7,\"name\":\"张晓天\",\"boolean\":true,\"double\":34.5,\"null\":null}";// 返回view 视图名称和相对 requestMapping 请求路径的 相对视图路径。
     }
 
     /**
