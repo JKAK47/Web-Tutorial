@@ -1,8 +1,6 @@
 package org.vincent.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.vincent.domain.Book;
+import org.vincent.domain.BookDetail;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -46,16 +45,16 @@ public class BookController {
      * @throws Exception
      */
     // @ResponseBody 会将Book自动转成XML数据返回
-    @RequestMapping(value = "/readxml", method = RequestMethod.POST,produces = MediaType.APPLICATION_XHTML_XML_VALUE)
+    @RequestMapping(value = "/readxml", method = RequestMethod.GET,produces = MediaType.APPLICATION_XHTML_XML_VALUE)
     @ResponseBody
-    public Book readXml() throws Exception {
+    public BookDetail readXml() throws Exception {
         // 通过JAXBContext的newInstance方法，传递一个class就可以获得一个上下文
-        JAXBContext context = JAXBContext.newInstance(Book.class);
+        JAXBContext context = JAXBContext.newInstance(BookDetail.class);
         // 创建一个Unmarshall对象
         Unmarshaller unmar = context.createUnmarshaller();
         InputStream is = this.getClass().getResourceAsStream("/book.xml");
         // Unmarshall对象的unmarshal方法可以进行xml到Java对象的转换
-        Book book = (Book) unmar.unmarshal(is);
+        BookDetail book = (BookDetail) unmar.unmarshal(is);
         log.info(book.toString());
         return book;
     }

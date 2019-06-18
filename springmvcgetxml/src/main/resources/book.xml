@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<book>
+<bookDetail>
 	<id>1</id>
 	<name>Spring MVC企业应用实战</name>
 	<author>肖文吉</author>
-</book>
+	<detail>
+		<isbn>978-201-1456-11-2b</isbn>
+		<publisherDate>2019-06-18</publisherDate>
+	</detail>
+</bookDetail>
+
 
