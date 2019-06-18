@@ -194,12 +194,12 @@ public class SpringMVCWebConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasenames("language/message");
+        source.setBasenames("language/message");/** 指定国际化文件 ： 说明该文件在src/main/resources/language/目录下的message 文件 */
         return source;
     }
 
     /**
-     * 国际化操作如果基于 Session/Cookie 设置 则必须设置
+     * 国际化操作拦截器 如果基于 Session/Cookie 设置 则必须设置
      *
      * @param registry
      */
