@@ -499,6 +499,7 @@
         <module>SpringmvcNoWebXml</module>
         <module>springmvcCustDateBindNoXML</module>
         <module>springmvcgetxml</module>
+        <module>springmvcPractical</module>
     </modules>
 
 
