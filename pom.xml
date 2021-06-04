@@ -16,7 +16,7 @@
         <mysql.driver.version>6.0.4</mysql.driver.version>
         <druid.version>1.1.10</druid.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
-        <hibernate.validation.version>6.0.16.Final</hibernate.validation.version>
+        <hibernate.validation.version>6.0.20.Final</hibernate.validation.version>
     </properties>
     <groupId>org.vincent</groupId>
     <artifactId>Web-Tutorial</artifactId>
